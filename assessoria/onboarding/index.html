@@ -23,6 +23,21 @@
 
 *{box-sizing:border-box}
 
+  <script>
+let formSubmitted = false;
+
+document.getElementById("onboarding-form").addEventListener("submit", function() {
+  formSubmitted = true;
+});
+
+document.querySelector("iframe[name='hidden_iframe']").addEventListener("load", function() {
+  if(formSubmitted){
+    document.getElementById("form-container").innerHTML =
+      "<div class='success-state'><h2>cadastro enviado :)</h2><p>recebemos suas informações e o time da elã vai organizar tudo por aqui.</p></div>";
+  }
+});
+</script>
+
 body{
 margin:0;
 background:var(--bg);
