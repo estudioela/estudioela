@@ -139,7 +139,7 @@ font-size:12px;
 font-weight:600;
 }
 
-input,textarea{
+input{
 width:100%;
 border:1px solid var(--line);
 border-radius:8px;
@@ -149,7 +149,7 @@ font-size:14px;
 outline:none;
 }
 
-input:focus,textarea:focus{
+input:focus{
 border-color:var(--line-strong);
 box-shadow:0 0 0 3px rgba(205,0,5,.08);
 }
@@ -157,17 +157,22 @@ box-shadow:0 0 0 3px rgba(205,0,5,.08);
 .checkbox-group{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:10px 14px;
+gap:10px 24px;
+margin-top:6px;
 }
 
 .checkbox-item{
 display:flex;
 align-items:center;
-gap:8px;
+gap:10px;
+font-size:13px;
+cursor:pointer;
 }
 
 .checkbox-item input{
 accent-color:var(--accent);
+width:16px;
+height:16px;
 }
 
 .actions{
@@ -215,7 +220,10 @@ body{padding:20px 12px}
 
 .logo-img{height:88px}
 
-.grid,
+.grid{
+grid-template-columns:1fr;
+}
+
 .checkbox-group{
 grid-template-columns:1fr;
 }
@@ -233,7 +241,7 @@ grid-template-columns:1fr;
 <div id="form-container">
 
 <div class="logo-wrap">
-<img src="/assets/logo-ela.svg" class="logo-img" alt="elã"/>
+<img src="/assets/logo-ela.svg" class="logo-img" alt="elã">
 </div>
 
 <h1>[influenciadora] onboarding</h1>
@@ -246,10 +254,12 @@ grid-template-columns:1fr;
 
 <div class="divider"></div>
 
-<form id="onboarding-form"
+<form
+id="onboarding-form"
 action="https://docs.google.com/forms/d/e/1FAIpQLSfTAs-dn8MboKGlsBHnyHxdVbkOYf2B5Jfb5pX6-EBa65MoPw/formResponse"
 method="post"
-target="hidden_iframe">
+target="hidden_iframe"
+>
 
 <div class="section">
 
@@ -264,7 +274,7 @@ target="hidden_iframe">
 
 <div class="field">
 <label>whatsapp para contato *</label>
-<input type="tel" name="entry.2045265097" required>
+<input type="tel" name="entry.1294192574" required>
 </div>
 
 <div class="field">
@@ -274,16 +284,16 @@ target="hidden_iframe">
 
 <div class="field">
 <label>cnpj *</label>
-<input type="text" name="entry.882320569" required>
+<input type="text" name="entry.2045265097" required>
 </div>
 
 <div class="field">
 <label>pix *</label>
-<input type="text" name="entry.1294192574" required>
+<input type="text" name="entry.882320569" required>
 </div>
 
 <div class="field">
-<label>email que será usado em contratos e assinaturas *</label>
+<label>e-mail que será usado em contratos e assinaturas *</label>
 <input type="email" name="entry.1192038943" required>
 </div>
 
@@ -315,47 +325,17 @@ target="hidden_iframe">
 
 <div class="checkbox-group">
 
-<label class="checkbox-item">
-<input type="checkbox" name="entry.1866445082" value="stories">
-<span>stories</span>
-</label>
-
-<label class="checkbox-item">
-<input type="checkbox" name="entry.1866445082" value="carrossel">
-<span>carrossel</span>
-</label>
-
-<label class="checkbox-item">
-<input type="checkbox" name="entry.1866445082" value="reel">
-<span>reel</span>
-</label>
-
-<label class="checkbox-item">
-<input type="checkbox" name="entry.1866445082" value="tiktok">
-<span>tiktok</span>
-</label>
-
-<label class="checkbox-item">
-<input type="checkbox" name="entry.1866445082" value="live">
-<span>live</span>
-</label>
-
-<label class="checkbox-item">
-<input type="checkbox" name="entry.1866445082" value="presença em eventos">
-<span>presença em eventos</span>
-</label>
-
-<label class="checkbox-item">
-<input type="checkbox" name="entry.1866445082" value="ugc">
-<span>ugc</span>
-</label>
-
-<label class="checkbox-item">
-<input type="checkbox" name="entry.1866445082" value="outros">
-<span>outros</span>
-</label>
+<label class="checkbox-item"><input type="checkbox" name="entry.1866445082" value="stories">stories</label>
+<label class="checkbox-item"><input type="checkbox" name="entry.1866445082" value="carrossel">carrossel</label>
+<label class="checkbox-item"><input type="checkbox" name="entry.1866445082" value="reel">reel</label>
+<label class="checkbox-item"><input type="checkbox" name="entry.1866445082" value="tiktok">tiktok</label>
+<label class="checkbox-item"><input type="checkbox" name="entry.1866445082" value="live">live</label>
+<label class="checkbox-item"><input type="checkbox" name="entry.1866445082" value="presença em eventos">presença em eventos</label>
+<label class="checkbox-item"><input type="checkbox" name="entry.1866445082" value="UGC">ugc</label>
+<label class="checkbox-item"><input type="checkbox" name="entry.1866445082" value="outros">outros</label>
 
 </div>
+
 </div>
 
 <div class="grid" style="margin-top:14px">
@@ -395,53 +375,6 @@ target="hidden_iframe">
 </div>
 </div>
 </div>
-
-<script>
-
-let formSubmitted=false
-
-function formatFirstName(v){
-if(!v)return""
-let f=v.trim().split(/\s+/)[0]
-return f.charAt(0).toUpperCase()+f.slice(1).toLowerCase()
-}
-
-document.addEventListener("DOMContentLoaded",function(){
-
-const form=document.getElementById("onboarding-form")
-const iframe=document.querySelector("iframe")
-const container=document.getElementById("form-container")
-const nameInput=document.querySelector('input[name="entry.1793863804"]')
-
-form.addEventListener("submit",()=>formSubmitted=true)
-
-iframe.addEventListener("load",function(){
-
-if(!formSubmitted)return
-
-let first=formatFirstName(nameInput.value)
-let safe=first||"você"
-
-container.innerHTML=`
-
-<div class="logo-wrap">
-<img src="/assets/logo-ela.svg" class="logo-img">
-</div>
-
-<div class="success-state">
-<h2>cadastro enviado</h2>
-<p>obrigado, ${safe}. suas informações foram enviadas e já estão com a nossa equipe.</p>
-</div>
-`
-
-window.scrollTo({top:0,behavior:"smooth"})
-formSubmitted=false
-
-})
-
-})
-
-</script>
 
 </body>
 </html>
