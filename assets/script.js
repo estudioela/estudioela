@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Automação de Vogais no IvyPresto
+    // 1. Automação de Vogais (IvyPresto Display)
     const editorialTitles = document.querySelectorAll('.title-editorial');
-    
     editorialTitles.forEach(title => {
         const text = title.innerHTML;
         title.innerHTML = text.replace(/(?![^<]*>)([aeiouáéíóúãõâêîôû])/gi, '<span class="vowel">$1</span>');
@@ -12,28 +11,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if(scrollBtn) {
         scrollBtn.addEventListener("click", () => {
             const nextSection = document.getElementById("sobre-nos");
-            if(nextSection) {
-                nextSection.scrollIntoView({ behavior: "smooth" });
-            }
+            if(nextSection) nextSection.scrollIntoView({ behavior: "smooth" });
         });
     }
 
-    // 3. Animações Editoriais Modernas (GSAP)
+    // 3. Animações GSAP
     gsap.registerPlugin(ScrollTrigger);
-
     gsap.set(".gsap-fade, .stagger-item", { visibility: "visible" });
-
-    // Efeito Parallax sutil no vídeo do Hero
-    gsap.to(".hero-bg", {
-        yPercent: 20,
-        ease: "none",
-        scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: true
-        }
-    });
 
     // Fade Up Simples
     const fadeElements = document.querySelectorAll(".gsap-fade");
@@ -42,28 +26,20 @@ document.addEventListener("DOMContentLoaded", () => {
             { y: 30, opacity: 0 },
             {
                 y: 0, opacity: 1, duration: 1, ease: "power3.out",
-                scrollTrigger: {
-                    trigger: el,
-                    start: "top 85%",
-                    toggleActions: "play none none reverse"
-                }
+                scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none reverse" }
             }
         );
     });
 
-    // Stagger (Cascata)
+    // Stagger (Efeito cascata cool)
     const staggerGroups = document.querySelectorAll(".stagger-group");
     staggerGroups.forEach((group) => {
         const items = group.querySelectorAll(".stagger-item");
         gsap.fromTo(items, 
-            { y: 30, opacity: 0 },
+            { y: 20, opacity: 0 },
             {
-                y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power3.out",
-                scrollTrigger: {
-                    trigger: group,
-                    start: "top 80%",
-                    toggleActions: "play none none reverse"
-                }
+                y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out",
+                scrollTrigger: { trigger: group, start: "top 85%", toggleActions: "play none none reverse" }
             }
         );
     });
