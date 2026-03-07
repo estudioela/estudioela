@@ -40,7 +40,7 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background-color: #f3f3f3; /* Cor de fundo enquanto a capa carrega */
+    background-color: #f3f3f3;
 }
 
 .hero-bg {
@@ -70,6 +70,8 @@ body {
 .logo {
     height: 64px;
     width: auto;
+    /* Força o SVG a assumir o vermelho Elã (#cd0005) */
+    filter: brightness(0) saturate(100%) invert(12%) sepia(99%) saturate(6226%) hue-rotate(351deg) brightness(96%) contrast(106%);
 }
 
 .nav-menu {
@@ -83,6 +85,8 @@ body {
 .nav-title {
     font-size: 32px;
     margin-bottom: 8px;
+    font-weight: 700;
+    color: var(--accent);
 }
 
 .nav-link {
@@ -90,11 +94,12 @@ body {
     color: var(--accent);
     text-decoration: none;
     line-height: 1.4;
+    font-weight: 300;
     transition: opacity 0.3s ease;
 }
 
 .nav-link:hover {
-    opacity: 0.5;
+    font-weight: 700;
 }
 
 .scroll-indicator {
@@ -117,18 +122,68 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 100px 40px;
+    padding: 120px 40px;
 }
 
+/* Segunda Dobra: Norte */
 .norte-section {
     min-height: 100vh;
     background: var(--bg);
+    display: flex;
+    align-items: center;
 }
 
-/* Responsivo Básico */
+.norte-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+}
+
+.norte-col-left {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.norte-col-left h2 {
+    font-size: 64px;
+    line-height: 1.1;
+}
+
+.norte-icon {
+    width: 48px;
+    height: auto;
+}
+
+.norte-col-right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding-top: 12px;
+}
+
+.norte-col-right p {
+    font-size: 24px;
+    line-height: 1.5;
+    color: #3a3838;
+}
+
+.norte-col-right strong {
+    font-weight: 700;
+}
+
+/* Responsivo */
+@media(max-width: 992px) {
+    .norte-grid { grid-template-columns: 1fr; gap: 48px; }
+    .norte-col-left h2 { font-size: 48px; }
+    .norte-col-right p { font-size: 20px; }
+}
+
 @media(max-width: 768px) {
     .header { padding: 32px 24px; }
     .logo { height: 48px; }
     .nav-title { font-size: 28px; }
-    .container { padding: 60px 24px; }
+    .container { padding: 80px 24px; }
+    .norte-col-left h2 { font-size: 40px; }
 }
