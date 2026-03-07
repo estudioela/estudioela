@@ -24,6 +24,36 @@
             box-sizing: border-box;
         }
 
+        <script>
+document.getElementById("onboarding-form").addEventListener("submit", function() {
+
+  const nomeInput = document.querySelector('input[name="entry.209215860"]');
+  
+  let primeiroNome = "obrigado";
+
+  if (nomeInput && nomeInput.value.trim() !== "") {
+    const nomeCompleto = nomeInput.value.trim();
+    primeiroNome = nomeCompleto.split(" ")[0];
+    primeiroNome = primeiroNome.charAt(0).toUpperCase() + primeiroNome.slice(1).toLowerCase();
+  }
+
+  setTimeout(function(){
+    const formContainer = document.querySelector(".form-container");
+
+    if(formContainer){
+      formContainer.innerHTML = `
+        <div class="success-message">
+          <h2>cadastro enviado</h2>
+          <p>obrigado, ${primeiroNome}. suas informações foram enviadas e já estão com a nossa equipe.</p>
+        </div>
+      `;
+    }
+
+  }, 800);
+
+});
+</script>
+
         body {
             font-family: "acumin-pro", "acumin pro", "helvetica neue", arial, sans-serif;
             background-color: var(--bg-color);
