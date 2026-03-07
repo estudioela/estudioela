@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
         title.innerHTML = text.replace(/(?![^<]*>)([aeiouáéíóúãõâêîôû])/gi, '<span class="vowel">$1</span>');
     });
 
-    // 2. Scroll suave do Hero
+    // 2. Scroll suave do Hero (Seta)
     const scrollBtn = document.getElementById("scroll-down");
     if(scrollBtn) {
         scrollBtn.addEventListener("click", () => {
@@ -17,7 +17,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 3. Animações GSAP
     gsap.registerPlugin(ScrollTrigger);
+
+    // Revela os itens para o JavaScript assumir
     gsap.set(".gsap-fade, .stagger-item", { visibility: "visible" });
+
+    // Parallax Sutil no Vídeo Hero
+    gsap.to(".hero-bg", {
+        yPercent: 20,
+        ease: "none",
+        scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: true
+        }
+    });
 
     // Fade Up Simples
     const fadeElements = document.querySelectorAll(".gsap-fade");
@@ -26,12 +40,16 @@ document.addEventListener("DOMContentLoaded", () => {
             { y: 30, opacity: 0 },
             {
                 y: 0, opacity: 1, duration: 1, ease: "power3.out",
-                scrollTrigger: { trigger: el, start: "top 90%", toggleActions: "play none none reverse" }
+                scrollTrigger: { 
+                    trigger: el, 
+                    start: "top 90%", 
+                    toggleActions: "play none none reverse" 
+                }
             }
         );
     });
 
-    // Stagger (Efeito cascata cool)
+    // Stagger (Efeito Cascata em blocos de texto)
     const staggerGroups = document.querySelectorAll(".stagger-group");
     staggerGroups.forEach((group) => {
         const items = group.querySelectorAll(".stagger-item");
@@ -39,7 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
             { y: 20, opacity: 0 },
             {
                 y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out",
-                scrollTrigger: { trigger: group, start: "top 85%", toggleActions: "play none none reverse" }
+                scrollTrigger: { 
+                    trigger: group, 
+                    start: "top 85%", 
+                    toggleActions: "play none none reverse" 
+                }
             }
         );
     });
