@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="https://use.typekit.net/piy8ljr.css"/>
 
 <style>
-
 :root{
 --bg:#f3f3f3;
 --card:#ffffff;
@@ -22,21 +21,6 @@
 }
 
 *{box-sizing:border-box}
-
-  <script>
-let formSubmitted = false;
-
-document.getElementById("onboarding-form").addEventListener("submit", function() {
-  formSubmitted = true;
-});
-
-document.querySelector("iframe[name='hidden_iframe']").addEventListener("load", function() {
-  if(formSubmitted){
-    document.getElementById("form-container").innerHTML =
-      "<div class='success-state'><h2>cadastro enviado :)</h2><p>recebemos suas informações e o time da elã vai organizar tudo por aqui.</p></div>";
-  }
-});
-</script>
 
 body{
 margin:0;
@@ -211,13 +195,14 @@ background:var(--accent-dark);
 }
 
 .success-state{
-padding:28px 8px 6px;
+padding:40px 20px;
 text-align:center;
 }
 
 .success-state h2{
 margin:0 0 10px;
 font-size:22px;
+color: var(--text);
 }
 
 .success-state p{
@@ -230,21 +215,11 @@ display:none;
 }
 
 @media(max-width:640px){
-
 body{padding:20px 12px}
-
 .logo-img{height:88px}
-
-.grid{
-grid-template-columns:1fr;
+.grid{grid-template-columns:1fr}
+.checkbox-group{grid-template-columns:1fr}
 }
-
-.checkbox-group{
-grid-template-columns:1fr;
-}
-
-}
-
 </style>
 </head>
 
@@ -277,14 +252,12 @@ target="hidden_iframe"
 >
 
 <div class="section">
-
 <h2 class="section-title">dados</h2>
-
 <div class="grid">
 
 <div class="field full">
 <label>nome profissional *</label>
-<input type="text" name="entry.1793863804" required>
+<input type="text" id="nome_profissional" name="entry.1793863804" required>
 </div>
 
 <div class="field">
@@ -331,15 +304,10 @@ target="hidden_iframe"
 </div>
 
 <div class="section">
-
 <h2 class="section-title">conteúdo</h2>
-
 <div class="field full">
-
 <label>formatos de conteúdo que entrega hoje *</label>
-
 <div class="checkbox-group">
-
 <label class="checkbox-item"><input type="checkbox" name="entry.1866445082" value="stories">stories</label>
 <label class="checkbox-item"><input type="checkbox" name="entry.1866445082" value="carrossel">carrossel</label>
 <label class="checkbox-item"><input type="checkbox" name="entry.1866445082" value="reel">reel</label>
@@ -348,35 +316,27 @@ target="hidden_iframe"
 <label class="checkbox-item"><input type="checkbox" name="entry.1866445082" value="presença em eventos">presença em eventos</label>
 <label class="checkbox-item"><input type="checkbox" name="entry.1866445082" value="UGC">ugc</label>
 <label class="checkbox-item"><input type="checkbox" name="entry.1866445082" value="outros">outros</label>
-
 </div>
-
 </div>
 
 <div class="grid" style="margin-top:14px">
-
 <div class="field">
 <label>quais são os seus valores atuais por formato *</label>
 <input type="text" name="entry.385515193" required>
 </div>
-
 <div class="field">
 <label>com quais marcas você já trabalhou até aqui *</label>
 <input type="text" name="entry.197983328" required>
 </div>
-
 <div class="field">
 <label>existe algum nicho de moda que você não trabalha *</label>
 <input type="text" name="entry.15845940" required>
 </div>
-
 <div class="field">
 <label>quais nichos têm mais fit com o seu perfil hoje *</label>
 <input type="text" name="entry.723127278" required>
 </div>
-
 </div>
-
 </div>
 
 <div class="actions">
@@ -385,11 +345,35 @@ target="hidden_iframe"
 
 </form>
 
-<iframe name="hidden_iframe" class="hidden-iframe"></iframe>
+<iframe name="hidden_iframe" id="hidden_iframe" class="hidden-iframe"></iframe>
 
 </div>
 </div>
 </div>
+
+<script>
+let formSubmitted = false;
+
+document.getElementById("onboarding-form").addEventListener("submit", function() {
+  formSubmitted = true;
+});
+
+document.getElementById("hidden_iframe").addEventListener("load", function() {
+  if(formSubmitted){
+    const nomeBruto = document.getElementById("nome_profissional").value.trim();
+    const primeiroNome = nomeBruto.split(' ')[0];
+    const nomeFormatado = primeiroNome.charAt(0).toUpperCase() + primeiroNome.slice(1).toLowerCase();
+
+    document.getElementById("form-container").innerHTML =
+      `<div class='success-state'>
+        <h2>obrigado, ${nomeFormatado}!</h2>
+        <p>seus dados já estão com a equipe do Estúdio Elã.</p>
+      </div>`;
+      
+    window.scrollTo(0,0);
+  }
+});
+</script>
 
 </body>
 </html>
