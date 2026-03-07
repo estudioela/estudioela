@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     editorialTitles.forEach(title => {
         const text = title.innerHTML;
-        // Envelopa todas as vogais em um <span> para aplicar o itálico
+        // Envelopa todas as vogais em um <span> para aplicar o itálico via CSS
         title.innerHTML = text.replace(/([aeiouáéíóúãõâêîôû])/gi, '<span class="vowel">$1</span>');
     });
 
