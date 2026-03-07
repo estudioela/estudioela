@@ -8,6 +8,9 @@
 <link rel="icon" href="/assets/favicon-ela.webp" type="image/webp"/>
 <link rel="stylesheet" href="https://use.typekit.net/piy8ljr.css"/>
 <link rel="stylesheet" href="/assets/styles.css"/>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 
 <body>
@@ -20,7 +23,7 @@
         </video>
         
         <header class="header">
-            <div class="container header-container">
+            <div class="container header-container gsap-fade">
                 <a href="#" aria-label="Home" class="logo-link">
                     <img src="/assets/logo-ela.svg" alt="Estúdio Elã" class="logo">
                 </a>
@@ -29,12 +32,12 @@
                     <a href="#sobre-nos" class="nav-link">sobre nós</a>
                     <a href="#arquitetura" class="nav-link">arquitetura<br>de serviços</a>
                     <a href="#metodologia" class="nav-link">metodologia</a>
-                    <a href="/assessoria/desejo" class="nav-link">que tal um<br>café?</a>
+                    <a href="#cafe" class="nav-link">que tal um<br>café?</a>
                 </nav>
             </div>
         </header>
         
-        <div class="scroll-indicator" id="scroll-down">
+        <div class="scroll-indicator gsap-fade" id="scroll-down">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#cd0005" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
         </div>
     </section>
@@ -42,12 +45,12 @@
     <section class="section-light" id="sobre-nos">
         <div class="container">
             <div class="norte-grid">
-                <div class="norte-col-left">
+                <div class="norte-col-left gsap-fade">
                     <h2 class="title-editorial">marcas não precisam de fórmula. precisam de norte.</h2>
-                    <img src="/assets/norte-icon.svg" alt="" class="norte-icon" onerror="this.style.display='none'">
+                    <img src="/assets/norte-icon.svg" alt="Estrela Elã" class="norte-icon">
                 </div>
                 
-                <div class="norte-col-right">
+                <div class="norte-col-right gsap-fade">
                     <p><strong>somos um estúdio que lê marcas antes de movimentá-las.</strong> não começamos pelo conteúdo, começamos pela direção: o que a marca defende, como ela aparece e por que isso importa para quem a encontra pela primeira vez.</p>
                     <p>escutamos o que já se sustenta e o que pede revisão. unimos posicionamento, narrativa e estética, dados para dar chão, sensibilidade para dar forma.</p>
                     <p><strong>trabalhamos como parceiros de construção.</strong> o que nasce daí, seja direção criativa, editorial, social ou influência, carrega o mesmo norte. consistência não como resultado, mas como método.</p>
@@ -58,25 +61,25 @@
 
     <section class="section-light" id="arquitetura">
         <div class="container">
-            <h2 class="title-editorial titulo-arquitetura">arquitetura de serviços</h2>
+            <h2 class="title-editorial titulo-arquitetura gsap-fade">arquitetura de serviços</h2>
             
             <div class="arq-bloco arq-bloco-left">
-                <div class="arq-item">
+                <div class="arq-item gsap-fade">
                     <h3>direção criativa e produção de campanhas</h3>
                     <p>uma campanha não começa na produção. começa na pergunta certa: o que essa coleção quer dizer e para quem ela fala. lemos coleção, momento de mercado e camadas de tendência para encontrar o fio que orienta cada escolha criativa, do naming ao conceito visual. dali, a produção carrega essa direção até o final, seja campanha completa ou lookbook. imagem sem direção é apenas registro.</p>
                 </div>
-                <div class="arq-item">
+                <div class="arq-item gsap-fade">
                     <h3>gestão de marketing de influência</h3>
                     <p>influência que constrói marca não é questão de volume, é questão de fit. a maioria das ativações falha antes de começar, quando o perfil é escolhido pelo alcance e não pelo que representa. cuidamos de todo o ciclo, da curadoria dos perfis certos até a entrega final, com rigor no processo e sensibilidade para o que cada marca pede.</p>
                 </div>
             </div>
 
             <div class="arq-bloco arq-bloco-right">
-                <div class="arq-item">
+                <div class="arq-item gsap-fade">
                     <h3>branding para marcas pessoais</h3>
                     <p>traduzimos essência e repertório em posicionamento com contorno, narrativa com voz própria e estética com assinatura. um processo para influenciadoras e profissionais de moda que precisam crescer com consistência, sem se perder nas tendências da semana.</p>
                 </div>
-                <div class="arq-item">
+                <div class="arq-item gsap-fade">
                     <h3>branding para marcas de moda</h3>
                     <p>uma marca forte não se reconhece pelo logo. se reconhece pela coerência entre o que diz, o que vende e como aparece. começamos com imersão: contexto, produto, público e o valor que a marca já carrega sem saber nomear. dali, estruturamos posicionamento, plataforma e narrativa com critério suficiente para que cada decisão futura tenha onde se apoiar. o entregável é um sistema vivo, não um manual engessado.</p>
                 </div>
@@ -86,7 +89,7 @@
 
     <section class="section-red" id="metodologia">
         <div class="container container-metodologia">
-            <div class="metodologia-content">
+            <div class="metodologia-content gsap-fade">
                 <h2 class="title-editorial">nossa metodologia</h2>
                 <p>não existe atalho que preserve o essencial. começamos pela leitura do que a marca sustenta hoje e transformamos isso em escolhas práticas: o que dizer, como dizer e onde aparecer com sentido.</p>
                 <p>em um cenário com muito ruído, o que diferencia é o artesanal: a escuta que antecede a proposta, o critério que organiza as escolhas, a síntese que dá forma. <strong>a tecnologia entra como ferramenta dentro desse método, nunca como norte.</strong></p>
@@ -94,13 +97,15 @@
             </div>
         </div>
 
-        <div class="container container-footer">
-            <h2 class="title-editorial title-center">branding, conteúdo e influência para marcas de moda e lifestyle</h2>
-            <p class="cafe-texto"><strong>que tal um café?</strong> um convite simples para conversar sobre a sua marca, entender o momento e pensar juntos os próximos passos. <strong>conversa leve, com clareza e sem pressão.</strong></p>
+        <div class="container container-footer" id="cafe">
+            <h2 class="title-editorial title-center gsap-fade">branding, conteúdo e influência para marcas de moda e lifestyle</h2>
+            <p class="cafe-texto gsap-fade"><strong>que tal um café?</strong> um convite simples para conversar sobre a sua marca, entender o momento e pensar juntos os próximos passos. <strong>conversa leve, com clareza e sem pressão.</strong></p>
             
-            <a href="/assessoria/desejo" class="btn-agendar">agendar :)</a>
+            <div class="gsap-fade">
+                <a href="http://wa.me/5522936182313" class="btn-agendar" target="_blank" rel="noopener noreferrer">agendar :)</a>
+            </div>
             
-            <p class="footer-links">estúdio elã | <strong>instagram</strong> | linkedin | contato</p>
+            <p class="footer-links gsap-fade">estúdio elã | <a href="https://instagram.com/estudioela" target="_blank" rel="noopener noreferrer"><strong>instagram</strong></a> | linkedin | <a href="mailto:conversa@estudioela.com">contato</a></p>
         </div>
     </section>
 
