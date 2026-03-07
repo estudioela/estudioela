@@ -83,15 +83,17 @@ a {
 
 .logo-link {
     display: inline-block;
+    line-height: 0; /* Remove espaços extras de linha */
 }
 
 /* Solução Definitiva para o Logo Principal */
 .logo {
     width: 80px;
-    height: auto; /* Mantém a proporção original do SVG */
+    height: auto; 
     display: block;
-    overflow: visible; /* Garante que filtros ou sombras não sejam cortados */
-    padding: 4px; /* Padding de segurança interno para evitar cortes nas extremidades */
+    overflow: visible; 
+    padding: 10px; /* Padding generoso para evitar cortes de renderização */
+    margin: -10px; /* Compensa o padding para manter o alinhamento visual */
     filter: brightness(0) saturate(100%) invert(13%) sepia(93%) saturate(6001%) hue-rotate(348deg) brightness(88%) contrast(114%);
 }
 
@@ -108,7 +110,7 @@ a {
     font-size: 15px; /* Tamanho reduzido */
     color: var(--accent);
     line-height: 1.3;
-    font-weight: 500; /* Aumentado o peso conforme solicitado */
+    font-weight: 500; /* Peso aumentado conforme solicitado */
     text-align: right;
     position: relative;
     display: inline-block;
@@ -237,23 +239,23 @@ a {
     color: var(--bg-white);
     padding: 120px 0 0 0;
     position: relative;
-    overflow: hidden; /* Cobre todo o sangramento excedente do logo para não dar scroll lateral */
+    overflow: hidden; 
 }
 
 /* Centralização Absoluta da Última Dobra (Metodologia/Footer) */
 .container-metodologia {
     display: flex;
-    justify-content: center; /* Centralizado horizontalmente */
+    justify-content: center; 
     margin-bottom: 100px;
 }
 
 .metodologia-content {
     width: 100%;
     max-width: 948px;
-    text-align: center; /* Texto centralizado */
+    text-align: center; 
     display: flex;
     flex-direction: column;
-    align-items: center; /* Conteúdo centralizado */
+    align-items: center; 
     gap: 20px;
     position: relative;
     z-index: 5;
@@ -273,12 +275,13 @@ a {
 .container-footer {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centralizado horizontalmente */
-    justify-content: center; /* Centralizado verticalmente */
+    align-items: center; 
+    justify-content: center; 
     gap: 40px;
     position: relative;
     z-index: 5; 
     text-align: center;
+    padding-bottom: 60px;
 }
 
 .cafe-texto {
@@ -292,7 +295,7 @@ a {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 208px; /* Botão reduzido 50% */
+    width: 208px; 
     height: 48px;
     background: var(--bg-white);
     color: var(--accent);
@@ -327,14 +330,14 @@ a {
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 60px; /* Distância entre o texto do rodapé e o topo do logo */
+    margin-top: 60px; 
     pointer-events: none;
 }
 
 .footer-bleed {
-    width: 120%; /* Estica para além das laterais */
+    width: 120%; 
     min-width: 1200px;
-    transform: translateY(15%); /* Empurra a imagem para baixo para o fundo da tela cortar ela */
+    transform: translateY(15%); 
     display: block;
 }
 
@@ -350,7 +353,6 @@ a {
     .norte-grid { flex-direction: column; gap: 40px; }
     .norte-col-left, .norte-col-right, .arq-bloco { width: 100%; text-align: left; }
     
-    /* Mantendo a centralização absoluta na última dobra mesmo em mobile */
     .metodologia-content { width: 100%; text-align: center; align-items: center; }
     .title-center { font-size: 48px; }
     .footer-bleed { width: 150%; transform: translateY(10%); }
