@@ -10,12 +10,12 @@
 
   <style>
     :root {
-      --bg: #f7f7f7;
+      --bg: #f3f3f3;
       --card: #ffffff;
-      --text: #1a1a1a;
-      --muted: #6f6f6f;
-      --line: rgba(205, 0, 5, 0.18);
-      --line-strong: rgba(205, 0, 5, 0.35);
+      --text: #1f1f1f;
+      --muted: #666666;
+      --line: rgba(205, 0, 5, 0.16);
+      --line-strong: rgba(205, 0, 5, 0.3);
       --accent: #cd0005;
       --accent-dark: #a80004;
     }
@@ -47,19 +47,20 @@
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: 12px;
-      padding: 34px 28px 28px;
+      padding: 28px 28px 28px;
       box-shadow: 0 8px 28px rgba(0, 0, 0, 0.03);
     }
 
     .logo-wrap {
       text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
-    .logo {
-      width: auto;
-      height: 72px;
+    .logo-img {
       display: inline-block;
+      width: auto;
+      height: 112px;
+      max-width: 100%;
     }
 
     h1 {
@@ -71,8 +72,9 @@
     }
 
     .intro {
-      max-width: 540px;
-      margin: 0 auto 22px;
+      width: 100%;
+      max-width: none;
+      margin: 0 0 22px 0;
       font-size: 13px;
       color: var(--muted);
     }
@@ -261,11 +263,11 @@
       }
 
       .card {
-        padding: 26px 18px 22px;
+        padding: 24px 18px 22px;
       }
 
-      .logo {
-        height: 64px;
+      .logo-img {
+        height: 88px;
       }
 
       .grid,
@@ -280,7 +282,7 @@
     <div class="card">
       <div id="form-container">
         <div class="logo-wrap">
-          <img src="/assets/logo-ela.svg" alt="elã" class="logo" />
+          <img src="/assets/logo-ela.svg" alt="elã" class="logo-img" />
         </div>
 
         <h1>[influenciadora] onboarding</h1>
@@ -530,11 +532,11 @@
         if (!formSubmitted) return;
 
         const firstName = formatFirstName(nomeInput ? nomeInput.value : "");
-        const safeName = firstName || "você";
+        const safeName = firstName || "Você";
 
         formContainer.innerHTML = `
           <div class="logo-wrap">
-            <img src="/assets/logo-ela.svg" alt="elã" class="logo" />
+            <img src="/assets/logo-ela.svg" alt="elã" class="logo-img" />
           </div>
 
           <div class="success-state">
