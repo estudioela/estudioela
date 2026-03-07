@@ -179,10 +179,20 @@ a {
     gap: 20px; /* Respiro reduzido entre os parágrafos */
 }
 
+/* Tamanho padrão para todos os textos de apoio */
 .norte-col-right p, .arq-item p, .metodologia-content p, .cafe-texto {
-    font-size: 18px; /* Tamanho reduzido */
-    line-height: 1.5; /* Espaçamento de linha alinhado à fonte menor */
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* Cor preta para os textos do fundo claro */
+.norte-col-right p, .arq-item p {
     color: var(--text-dark);
+}
+
+/* Cor branca para os textos do fundo vermelho */
+.metodologia-content p, .cafe-texto {
+    color: var(--bg-white);
 }
 
 .norte-col-right strong, .metodologia-content strong {
