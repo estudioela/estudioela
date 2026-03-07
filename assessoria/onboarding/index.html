@@ -1,555 +1,447 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>[assessoria] onboarding | elã</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>[assessoria] onboarding | elã</title>
 
-  <link rel="icon" href="/assets/favicon-ela.webp" type="image/webp" />
-  <link rel="stylesheet" href="https://use.typekit.net/piy8ljr.css" />
+<link rel="icon" href="/assets/favicon-ela.webp" type="image/webp"/>
+<link rel="stylesheet" href="https://use.typekit.net/piy8ljr.css"/>
 
-  <style>
-    :root {
-      --bg: #f3f3f3;
-      --card: #ffffff;
-      --text: #1f1f1f;
-      --muted: #666666;
-      --line: rgba(205, 0, 5, 0.16);
-      --line-strong: rgba(205, 0, 5, 0.3);
-      --accent: #cd0005;
-      --accent-dark: #a80004;
-    }
+<style>
 
-    * {
-      box-sizing: border-box;
-    }
+:root{
+--bg:#f3f3f3;
+--card:#ffffff;
+--text:#1f1f1f;
+--muted:#666666;
+--line:rgba(205,0,5,.16);
+--line-strong:rgba(205,0,5,.3);
+--accent:#cd0005;
+--accent-dark:#a80004;
+}
 
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-    }
+*{box-sizing:border-box}
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: "acumin-pro", "acumin pro", "Helvetica Neue", Arial, sans-serif;
-      line-height: 1.45;
-      padding: 40px 16px;
-    }
+body{
+margin:0;
+background:var(--bg);
+color:var(--text);
+font-family:"acumin-pro","Helvetica Neue",Arial,sans-serif;
+line-height:1.45;
+padding:40px 16px;
+}
 
-    .page {
-      max-width: 760px;
-      margin: 0 auto;
-    }
+.page{
+max-width:760px;
+margin:0 auto;
+}
 
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 28px 28px 28px;
-      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.03);
-    }
+.card{
+background:var(--card);
+border:1px solid var(--line);
+border-radius:12px;
+padding:28px;
+box-shadow:0 8px 28px rgba(0,0,0,.03);
+}
 
-    .logo-wrap {
-      text-align: center;
-      margin-bottom: 8px;
-    }
+.logo-wrap{
+text-align:center;
+margin-bottom:8px;
+}
 
-    .logo-img {
-      display: inline-block;
-      width: auto;
-      height: 112px;
-      max-width: 100%;
-      filter: brightness(0) saturate(100%) invert(12%) sepia(99%) saturate(6226%) hue-rotate(351deg) brightness(96%) contrast(106%);
-    }
+.logo-img{
+height:112px;
+width:auto;
+filter:brightness(0) saturate(100%) invert(12%) sepia(99%) saturate(6226%) hue-rotate(351deg) brightness(96%) contrast(106%);
+}
 
-    h1 {
-      margin: 0 0 18px;
-      text-align: center;
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-    }
+h1{
+margin:0 0 18px;
+text-align:center;
+font-size:20px;
+font-weight:600;
+}
 
-    .intro {
-      width: 100%;
-      max-width: none;
-      margin: 0 0 22px 0;
-      font-size: 13px;
-      color: var(--muted);
-    }
+.intro{
+font-size:13px;
+color:var(--muted);
+margin-bottom:22px;
+}
 
-    .intro p {
-      margin: 0 0 10px;
-    }
+.intro p{
+margin:0 0 10px;
+}
 
-    .intro strong {
-      color: var(--text);
-      font-weight: 700;
-    }
+.intro strong{
+color:var(--text);
+}
 
-    .privacy {
-      margin-top: 10px;
-      font-size: 12px;
-      color: var(--muted);
-    }
+.privacy{
+font-size:12px;
+color:var(--muted);
+}
 
-    .divider {
-      position: relative;
-      height: 1px;
-      background: #ececec;
-      margin: 26px 0 26px;
-    }
+.divider{
+height:1px;
+background:#ececec;
+margin:26px 0;
+position:relative;
+}
 
-    .divider::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 22px;
-      height: 1px;
-      background: var(--accent);
-    }
+.divider::before{
+content:"";
+position:absolute;
+left:0;
+top:0;
+width:22px;
+height:1px;
+background:var(--accent);
+}
 
-    .section {
-      margin-top: 28px;
-    }
+.section{
+margin-top:28px;
+}
 
-    .section-title {
-      font-size: 14px;
-      font-weight: 700;
-      margin: 0 0 18px;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+.section-title{
+font-size:14px;
+font-weight:700;
+margin-bottom:18px;
+display:flex;
+align-items:center;
+gap:8px;
+}
 
-    .section-title::before {
-      content: "▪";
-      color: var(--accent);
-      font-size: 12px;
-      line-height: 1;
-    }
+.section-title::before{
+content:"▪";
+color:var(--accent);
+font-size:12px;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px 14px;
-    }
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+}
 
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
+.field{
+display:flex;
+flex-direction:column;
+gap:6px;
+}
 
-    .field.full {
-      grid-column: 1 / -1;
-    }
+.field.full{
+grid-column:1/-1;
+}
 
-    label {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text);
-    }
+label{
+font-size:12px;
+font-weight:600;
+}
 
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"],
-    textarea {
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-      color: var(--text);
-      font: inherit;
-      font-size: 14px;
-      padding: 12px 14px;
-      outline: none;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
+input,textarea{
+width:100%;
+border:1px solid var(--line);
+border-radius:8px;
+padding:12px 14px;
+font:inherit;
+font-size:14px;
+outline:none;
+}
 
-    textarea {
-      min-height: 110px;
-      resize: vertical;
-    }
+input:focus,textarea:focus{
+border-color:var(--line-strong);
+box-shadow:0 0 0 3px rgba(205,0,5,.08);
+}
 
-    input:focus,
-    textarea:focus {
-      border-color: var(--line-strong);
-      box-shadow: 0 0 0 3px rgba(205, 0, 5, 0.08);
-    }
+.checkbox-group{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px 14px;
+}
 
-    .checkbox-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px 14px;
-      margin-top: 2px;
-    }
+.checkbox-item{
+display:flex;
+align-items:center;
+gap:8px;
+}
 
-    .checkbox-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 24px;
-    }
+.checkbox-item input{
+accent-color:var(--accent);
+}
 
-    .checkbox-item input {
-      accent-color: var(--accent);
-      width: 15px;
-      height: 15px;
-      margin: 0;
-    }
+.actions{
+margin-top:30px;
+}
 
-    .checkbox-item span {
-      font-size: 13px;
-      color: var(--text);
-    }
+.submit-btn{
+width:100%;
+height:52px;
+border:0;
+border-radius:8px;
+background:var(--accent);
+color:#fff;
+font-size:15px;
+font-weight:700;
+cursor:pointer;
+}
 
-    .actions {
-      margin-top: 30px;
-    }
+.submit-btn:hover{
+background:var(--accent-dark);
+}
 
-    .submit-btn {
-      width: 100%;
-      height: 52px;
-      border: 0;
-      border-radius: 8px;
-      background: var(--accent);
-      color: #fff;
-      font: inherit;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.2s ease, transform 0.02s ease;
-    }
+.success-state{
+padding:28px 8px 6px;
+text-align:center;
+}
 
-    .submit-btn:hover {
-      background: var(--accent-dark);
-    }
+.success-state h2{
+margin:0 0 10px;
+font-size:22px;
+}
 
-    .submit-btn:active {
-      transform: translateY(1px);
-    }
+.success-state p{
+margin:0;
+color:var(--muted);
+}
 
-    .success-state {
-      padding: 28px 8px 6px;
-      text-align: center;
-    }
+.hidden-iframe{
+display:none;
+}
 
-    .success-state h2 {
-      margin: 0 0 10px;
-      font-size: 22px;
-      font-weight: 600;
-    }
+@media(max-width:640px){
 
-    .success-state p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
+body{padding:20px 12px}
 
-    .hidden-iframe {
-      display: none;
-      width: 0;
-      height: 0;
-      border: 0;
-    }
+.logo-img{height:88px}
 
-    @media (max-width: 640px) {
-      body {
-        padding: 20px 12px;
-      }
+.grid,
+.checkbox-group{
+grid-template-columns:1fr;
+}
 
-      .card {
-        padding: 24px 18px 22px;
-      }
+}
 
-      .logo-img {
-        height: 88px;
-      }
-
-      .grid,
-      .checkbox-group {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+</style>
 </head>
+
 <body>
-  <div class="page">
-    <div class="card">
-      <div id="form-container">
-        <div class="logo-wrap">
-          <img src="/assets/logo-ela.svg" alt="elã" class="logo-img" />
-        </div>
 
-        <h1>[influenciadora] onboarding</h1>
+<div class="page">
+<div class="card">
 
-        <div class="intro">
-          <p>
-            esse formulário reúne as informações iniciais para formalização da assessoria e organização da operação. a ideia aqui é deixar tudo claro desde o começo: dados de cadastro, formatos de entrega, histórico de marcas e pontos que precisamos considerar ao apresentar oportunidades.
-          </p>
-          <p><strong>responda com atenção e da forma mais objetiva possível.</strong></p>
-          <p class="privacy">
-            importante: as informações ficam restritas ao time da elã e são usadas apenas para uma gestão dentro da assessoria.
-          </p>
-        </div>
+<div id="form-container">
 
-        <div class="divider"></div>
+<div class="logo-wrap">
+<img src="/assets/logo-ela.svg" class="logo-img" alt="elã"/>
+</div>
 
-        <form
-          id="onboarding-form"
-          action="https://docs.google.com/forms/d/e/1FAIpQLSfTAs-dn8MboKGlsBHnyHxdVbkOYf2B5Jfb5pX6-EBa65MoPw/formResponse"
-          method="post"
-          target="hidden_iframe"
-          novalidate
-        >
-          <div class="section">
-            <h2 class="section-title">dados pessoais</h2>
+<h1>[influenciadora] onboarding</h1>
 
-            <div class="grid">
-              <div class="field full">
-                <label for="nome-completo">nome completo *</label>
-                <input
-                  id="nome-completo"
-                  type="text"
-                  name="entry.209215860"
-                  required
-                />
-              </div>
+<div class="intro">
+<p>esse formulário reúne as informações iniciais para formalização da assessoria e organização da operação. a ideia aqui é deixar tudo claro desde o começo: dados de cadastro, formatos de entrega, histórico de marcas e pontos que precisamos considerar ao apresentar oportunidades.</p>
+<p><strong>responda com atenção e da forma mais objetiva possível.</strong></p>
+<p class="privacy">importante: as informações ficam restritas ao time da elã e são usadas apenas para uma gestão dentro da assessoria.</p>
+</div>
 
-              <div class="field">
-                <label for="cpf">cpf *</label>
-                <input
-                  id="cpf"
-                  type="text"
-                  name="entry.1294192574"
-                  required
-                />
-              </div>
+<div class="divider"></div>
 
-              <div class="field">
-                <label for="telefone">telefone para contato *</label>
-                <input
-                  id="telefone"
-                  type="tel"
-                  name="entry.2045265097"
-                  required
-                />
-              </div>
+<form id="onboarding-form"
+action="https://docs.google.com/forms/d/e/1FAIpQLSfTAs-dn8MboKGlsBHnyHxdVbkOYf2B5Jfb5pX6-EBa65MoPw/formResponse"
+method="post"
+target="hidden_iframe">
 
-              <div class="field full">
-                <label for="nome-profissional">nome profissional *</label>
-                <input
-                  id="nome-profissional"
-                  type="text"
-                  name="entry.1793863804"
-                  required
-                />
-              </div>
+<div class="section">
 
-              <div class="field">
-                <label for="cnpj">cnpj *</label>
-                <input
-                  id="cnpj"
-                  type="text"
-                  name="entry.882320569"
-                  required
-                />
-              </div>
+<h2 class="section-title">dados</h2>
 
-              <div class="field">
-                <label for="email">email *</label>
-                <input
-                  id="email"
-                  type="email"
-                  name="entry.1192038943"
-                  required
-                />
-              </div>
+<div class="grid">
 
-              <div class="field">
-                <label for="cep">cep *</label>
-                <input
-                  id="cep"
-                  type="text"
-                  name="entry.1385542680"
-                  required
-                />
-              </div>
+<div class="field full">
+<label>nome profissional *</label>
+<input type="text" name="entry.1793863804" required>
+</div>
 
-              <div class="field">
-                <label for="numero">número *</label>
-                <input
-                  id="numero"
-                  type="text"
-                  name="entry.1112328321"
-                  required
-                />
-              </div>
+<div class="field">
+<label>whatsapp para contato *</label>
+<input type="tel" name="entry.2045265097" required>
+</div>
 
-              <div class="field full">
-                <label for="perfil">@ do perfil *</label>
-                <input
-                  id="perfil"
-                  type="text"
-                  name="entry.1052588718"
-                  required
-                />
-              </div>
-            </div>
-          </div>
+<div class="field">
+<label>razão social *</label>
+<input type="text" name="entry.209215860" required>
+</div>
 
-          <div class="section">
-            <h2 class="section-title">conteúdo</h2>
+<div class="field">
+<label>cnpj *</label>
+<input type="text" name="entry.882320569" required>
+</div>
 
-            <div class="field full">
-              <label>formatos que você trabalha hoje *</label>
-              <div class="checkbox-group">
-                <label class="checkbox-item">
-                  <input type="checkbox" name="entry.1866445082" value="stories" />
-                  <span>stories</span>
-                </label>
+<div class="field">
+<label>pix *</label>
+<input type="text" name="entry.1294192574" required>
+</div>
 
-                <label class="checkbox-item">
-                  <input type="checkbox" name="entry.1866445082" value="carrossel" />
-                  <span>carrossel</span>
-                </label>
+<div class="field">
+<label>email que será usado em contratos e assinaturas *</label>
+<input type="email" name="entry.1192038943" required>
+</div>
 
-                <label class="checkbox-item">
-                  <input type="checkbox" name="entry.1866445082" value="reel" />
-                  <span>reel</span>
-                </label>
+<div class="field">
+<label>cep *</label>
+<input type="text" name="entry.1385542680" required>
+</div>
 
-                <label class="checkbox-item">
-                  <input type="checkbox" name="entry.1866445082" value="tiktok" />
-                  <span>tiktok</span>
-                </label>
+<div class="field">
+<label>número e complemento *</label>
+<input type="text" name="entry.1112328321" required>
+</div>
 
-                <label class="checkbox-item">
-                  <input type="checkbox" name="entry.1866445082" value="live" />
-                  <span>live</span>
-                </label>
+<div class="field full">
+<label>@ do instagram ou do tiktok *</label>
+<input type="text" name="entry.1052588718" required>
+</div>
 
-                <label class="checkbox-item">
-                  <input type="checkbox" name="entry.1866445082" value="presença em eventos" />
-                  <span>presença em eventos</span>
-                </label>
+</div>
+</div>
 
-                <label class="checkbox-item">
-                  <input type="checkbox" name="entry.1866445082" value="UGC" />
-                  <span>ugc</span>
-                </label>
+<div class="section">
 
-                <label class="checkbox-item">
-                  <input type="checkbox" name="entry.1866445082" value="outros" />
-                  <span>outros</span>
-                </label>
-              </div>
-            </div>
+<h2 class="section-title">conteúdo</h2>
 
-            <div class="grid" style="margin-top: 14px;">
-              <div class="field">
-                <label for="valor-base">valor base atual para publicidade *</label>
-                <input
-                  id="valor-base"
-                  type="text"
-                  name="entry.385515193"
-                  required
-                />
-              </div>
+<div class="field full">
 
-              <div class="field">
-                <label for="marcas-sonho">marcas com as quais deseja trabalhar *</label>
-                <input
-                  id="marcas-sonho"
-                  type="text"
-                  name="entry.197983328"
-                  required
-                />
-              </div>
+<label>formatos de conteúdo que entrega hoje *</label>
 
-              <div class="field">
-                <label for="nicho-atual">nicho atual *</label>
-                <input
-                  id="nicho-atual"
-                  type="text"
-                  name="entry.15845940"
-                  required
-                />
-              </div>
+<div class="checkbox-group">
 
-              <div class="field">
-                <label for="nicho-foco">nicho que deseja focar mais *</label>
-                <input
-                  id="nicho-foco"
-                  type="text"
-                  name="entry.723127278"
-                  required
-                />
-              </div>
-            </div>
-          </div>
+<label class="checkbox-item">
+<input type="checkbox" name="entry.1866445082" value="stories">
+<span>stories</span>
+</label>
 
-          <div class="actions">
-            <button type="submit" class="submit-btn">enviar cadastro :)</button>
-          </div>
-        </form>
+<label class="checkbox-item">
+<input type="checkbox" name="entry.1866445082" value="carrossel">
+<span>carrossel</span>
+</label>
 
-        <iframe
-          name="hidden_iframe"
-          id="hidden_iframe"
-          class="hidden-iframe"
-          title="envio oculto"
-        ></iframe>
-      </div>
-    </div>
-  </div>
+<label class="checkbox-item">
+<input type="checkbox" name="entry.1866445082" value="reel">
+<span>reel</span>
+</label>
 
-  <script>
-    let formSubmitted = false;
+<label class="checkbox-item">
+<input type="checkbox" name="entry.1866445082" value="tiktok">
+<span>tiktok</span>
+</label>
 
-    function formatFirstName(value) {
-      if (!value) return "";
-      const first = value.trim().split(/\s+/)[0] || "";
-      if (!first) return "";
-      return first.charAt(0).toUpperCase() + first.slice(1).toLowerCase();
-    }
+<label class="checkbox-item">
+<input type="checkbox" name="entry.1866445082" value="live">
+<span>live</span>
+</label>
 
-    document.addEventListener("DOMContentLoaded", function () {
-      const form = document.getElementById("onboarding-form");
-      const iframe = document.getElementById("hidden_iframe");
-      const formContainer = document.getElementById("form-container");
-      const nomeInput = document.getElementById("nome-completo");
+<label class="checkbox-item">
+<input type="checkbox" name="entry.1866445082" value="presença em eventos">
+<span>presença em eventos</span>
+</label>
 
-      form.addEventListener("submit", function () {
-        formSubmitted = true;
-      });
+<label class="checkbox-item">
+<input type="checkbox" name="entry.1866445082" value="ugc">
+<span>ugc</span>
+</label>
 
-      iframe.addEventListener("load", function () {
-        if (!formSubmitted) return;
+<label class="checkbox-item">
+<input type="checkbox" name="entry.1866445082" value="outros">
+<span>outros</span>
+</label>
 
-        const firstName = formatFirstName(nomeInput ? nomeInput.value : "");
-        const safeName = firstName || "Você";
+</div>
+</div>
 
-        formContainer.innerHTML = `
-          <div class="logo-wrap">
-            <img src="/assets/logo-ela.svg" alt="elã" class="logo-img" />
-          </div>
+<div class="grid" style="margin-top:14px">
 
-          <div class="success-state">
-            <h2>cadastro enviado</h2>
-            <p>obrigado, ${safeName}. suas informações foram enviadas e já estão com a nossa equipe.</p>
-          </div>
-        `;
+<div class="field">
+<label>quais são os seus valores atuais por formato *</label>
+<input type="text" name="entry.385515193" required>
+</div>
 
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        formSubmitted = false;
-      });
-    });
-  </script>
+<div class="field">
+<label>com quais marcas você já trabalhou até aqui *</label>
+<input type="text" name="entry.197983328" required>
+</div>
+
+<div class="field">
+<label>existe algum nicho de moda que você não trabalha *</label>
+<input type="text" name="entry.15845940" required>
+</div>
+
+<div class="field">
+<label>quais nichos têm mais fit com o seu perfil hoje *</label>
+<input type="text" name="entry.723127278" required>
+</div>
+
+</div>
+
+</div>
+
+<div class="actions">
+<button type="submit" class="submit-btn">enviar cadastro :)</button>
+</div>
+
+</form>
+
+<iframe name="hidden_iframe" class="hidden-iframe"></iframe>
+
+</div>
+</div>
+</div>
+
+<script>
+
+let formSubmitted=false
+
+function formatFirstName(v){
+if(!v)return""
+let f=v.trim().split(/\s+/)[0]
+return f.charAt(0).toUpperCase()+f.slice(1).toLowerCase()
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+
+const form=document.getElementById("onboarding-form")
+const iframe=document.querySelector("iframe")
+const container=document.getElementById("form-container")
+const nameInput=document.querySelector('input[name="entry.1793863804"]')
+
+form.addEventListener("submit",()=>formSubmitted=true)
+
+iframe.addEventListener("load",function(){
+
+if(!formSubmitted)return
+
+let first=formatFirstName(nameInput.value)
+let safe=first||"você"
+
+container.innerHTML=`
+
+<div class="logo-wrap">
+<img src="/assets/logo-ela.svg" class="logo-img">
+</div>
+
+<div class="success-state">
+<h2>cadastro enviado</h2>
+<p>obrigado, ${safe}. suas informações foram enviadas e já estão com a nossa equipe.</p>
+</div>
+`
+
+window.scrollTo({top:0,behavior:"smooth"})
+formSubmitted=false
+
+})
+
+})
+
+</script>
+
 </body>
 </html>
