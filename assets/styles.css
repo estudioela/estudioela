@@ -26,7 +26,7 @@ body {
 
 .container {
     width: 100%;
-    max-width: 1026px; /* 1440 - 207 - 207 */
+    max-width: 1026px; /* Layout 1440 - margens 207 */
     margin: 0 auto;
 }
 
@@ -48,7 +48,8 @@ a {
 .hero {
     position: relative;
     width: 100vw;
-    height: 100vh;
+    height: 100vh; /* Força exatamente a altura da tela, garantindo a seta visível */
+    min-height: 600px;
     overflow: hidden;
     background-color: #f3f3f3;
 }
@@ -58,7 +59,7 @@ a {
     top: 50%;
     left: 50%;
     min-width: 100%;
-    min-height: 100%;
+    min-height: 120%; /* Sobra para o Parallax não revelar o fundo */
     width: auto;
     height: auto;
     transform: translate(-50%, -50%);
@@ -68,7 +69,7 @@ a {
 
 .header {
     position: absolute;
-    top: 113px; /* Alinhamento Y do Figma */
+    top: 60px; /* Reduzido respiro do topo */
     left: 0;
     width: 100%;
     z-index: 10;
@@ -80,14 +81,16 @@ a {
     align-items: flex-start;
 }
 
-/* FIX DEFINITIVO DO LOGO: Adicionado overflow e padding para o filtro não cortar as bordas */
+.logo-link {
+    display: inline-block;
+}
+
+/* Logo principal solto para não sofrer corte pelo filtro/viewBox */
 .logo {
     width: 80px;
-    height: auto;
+    height: auto; /* Mantém a proporção original do SVG */
     display: block;
     overflow: visible;
-    padding: 8px; 
-    margin: -8px;
     filter: brightness(0) saturate(100%) invert(13%) sepia(93%) saturate(6001%) hue-rotate(348deg) brightness(88%) contrast(114%);
 }
 
@@ -95,26 +98,41 @@ a {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 14px;
-    margin-top: 17px; 
+    gap: 12px; /* Respiro reduzido */
+    margin-top: 10px; 
 }
 
-/* Menu reduzido conforme solicitado (15px) */
 .nav-link {
     font-family: "acumin-pro", sans-serif;
-    font-size: 15px;
+    font-size: 15px; /* Tamanho reduzido */
     color: var(--accent);
     line-height: 1.3;
     font-weight: 400;
     text-align: right;
-    transition: font-weight 0.2s ease;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 2px;
 }
 
-.nav-link:hover {
-    font-weight: 700;
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent);
+    transform-origin: bottom right;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Seta Down fixa na viewport */
+.nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* Seta amarrada ao fundo (30px do limite da tela) */
 .scroll-indicator {
     position: absolute;
     bottom: 30px;
@@ -124,20 +142,22 @@ a {
     cursor: pointer;
 }
 
-/* --- SEÇÕES --- */
+/* --- DOBRA 2 (NORTE) --- */
 .section-light {
-    padding: 80px 0; /* Respiros reduzidos */
+    padding: 100px 0; /* Respiro vertical reduzido */
     background: var(--bg-white);
     position: relative;
 }
 
-.pt-zero { padding-top: 0; }
+.pt-zero {
+    padding-top: 0;
+}
 
 .norte-grid {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 80px;
+    gap: 60px; /* Respiro reduzido entre as colunas */
 }
 
 .norte-col-left {
@@ -151,18 +171,17 @@ a {
     line-height: 1.1;
 }
 
-/* Textos reduzidos em 40% (18px) */
 .norte-col-right {
     width: 496px;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px; /* Respiro reduzido entre os parágrafos */
 }
 
 .norte-col-right p, .arq-item p, .metodologia-content p, .cafe-texto {
-    font-size: 18px;
-    line-height: 1.6;
+    font-size: 18px; /* Tamanho reduzido */
+    line-height: 1.5; /* Espaçamento de linha alinhado à fonte menor */
     color: var(--text-dark);
 }
 
@@ -170,44 +189,50 @@ a {
     font-weight: 700;
 }
 
-/* --- ARQUITETURA --- */
+/* --- DOBRA 3 (ARQUITETURA) --- */
 .titulo-arquitetura {
     color: var(--accent);
     font-size: 70px;
     line-height: 1.1;
-    margin-bottom: 50px;
+    margin-bottom: 50px; /* Respiro reduzido */
 }
 
 .arq-bloco {
     width: 687px;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 40px; /* Respiro reduzido */
 }
 
-.arq-bloco-left { margin-bottom: 60px; }
-.arq-bloco-right { margin-left: auto; text-align: right; }
+.arq-bloco-left {
+    margin-bottom: 60px;
+}
+
+.arq-bloco-right {
+    margin-left: auto;
+    text-align: right;
+}
 
 .arq-item h3 {
     font-size: 18px;
     font-weight: 700;
     color: var(--text-black);
-    margin-bottom: 12px;
+    margin-bottom: 10px; /* Respiro reduzido */
 }
 
-/* --- FOOTER E METODOLOGIA --- */
+/* --- DOBRA 4 & 5 (METODOLOGIA E FOOTER) --- */
 .section-red {
     background-color: var(--accent);
     color: var(--bg-white);
-    padding: 100px 0 0 0;
+    padding: 120px 0 0 0;
     position: relative;
-    overflow: hidden; /* Garante que o sangramento do logo não quebre o layout */
+    overflow: hidden; /* Cobre todo o sangramento excedente do logo para não dar scroll lateral */
 }
 
 .container-metodologia {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 100px;
+    margin-bottom: 100px; /* Respiro reduzido */
 }
 
 .metodologia-content {
@@ -215,7 +240,7 @@ a {
     text-align: right;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
     position: relative;
     z-index: 5;
 }
@@ -226,12 +251,15 @@ a {
     color: var(--bg-white);
 }
 
+.metodologia-content h2 {
+    margin-bottom: 30px; /* Respiro reduzido */
+}
+
 .container-footer {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 40px;
-    padding-bottom: 250px; /* Espaço para o logo de fundo */
     position: relative;
     z-index: 5; 
 }
@@ -243,18 +271,23 @@ a {
     color: white;
 }
 
-/* Botão agendar reduzido 50% */
 .btn-agendar {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 200px;
-    height: 44px;
+    width: 208px; /* Botão reduzido 50% */
+    height: 48px;
     background: var(--bg-white);
     color: var(--accent);
-    border-radius: 22px;
-    font-size: 14px;
+    border-radius: 24px;
+    font-size: 15px;
     font-weight: 700;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s;
+}
+
+.btn-agendar:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
 .footer-links {
@@ -262,29 +295,42 @@ a {
     color: white;
 }
 
-/* Logo de Sangramento (Bleed) conforme PDF */
-.footer-bleed {
-    position: absolute;
-    bottom: -10%; 
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120%; /* Gigante para sangrar nas laterais */
-    height: auto;
-    z-index: 1;
-    opacity: 0.9;
+.footer-links a {
+    transition: opacity 0.2s ease;
+}
+
+.footer-links a:hover {
+    opacity: 0.6;
+}
+
+/* Novo Wrapper de Sangramento (Footer Logo) */
+.footer-bleed-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 60px; /* Distância entre o texto do rodapé e o topo do logo */
     pointer-events: none;
 }
 
-/* Estados de animação GSAP */
+.footer-bleed {
+    width: 120%; /* Estica para além das laterais */
+    min-width: 1200px;
+    transform: translateY(15%); /* Empurra a imagem para baixo para o fundo da tela cortar ela */
+    display: block;
+}
+
+/* Estados iniciais do GSAP */
 .gsap-fade, .stagger-item {
     opacity: 0;
     visibility: hidden;
 }
 
+/* Responsivo */
 @media(max-width: 1100px) {
     .container { padding: 0 40px; }
     .norte-grid { flex-direction: column; gap: 40px; }
     .norte-col-left, .norte-col-right, .arq-bloco { width: 100%; text-align: left; }
     .metodologia-content { width: 100%; text-align: left; }
-    .footer-bleed { width: 150%; bottom: 0; }
+    .title-center { font-size: 48px; }
+    .footer-bleed { width: 150%; transform: translateY(10%); }
 }
