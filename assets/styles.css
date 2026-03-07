@@ -108,7 +108,7 @@ a {
     font-size: 15px; /* Tamanho reduzido */
     color: var(--accent);
     line-height: 1.3;
-    font-weight: 400;
+    font-weight: 500; /* Aumentado o peso conforme solicitado */
     text-align: right;
     position: relative;
     display: inline-block;
@@ -243,17 +243,17 @@ a {
 /* Centralização Absoluta da Última Dobra (Metodologia/Footer) */
 .container-metodologia {
     display: flex;
-    justify-content: center; /* Centralizado */
+    justify-content: center; /* Centralizado horizontalmente */
     margin-bottom: 100px;
 }
 
 .metodologia-content {
     width: 100%;
     max-width: 948px;
-    text-align: center; /* Centralizado */
+    text-align: center; /* Texto centralizado */
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centralizado */
+    align-items: center; /* Conteúdo centralizado */
     gap: 20px;
     position: relative;
     z-index: 5;
@@ -263,6 +263,7 @@ a {
     font-size: 70px;
     line-height: 1.1;
     color: var(--bg-white);
+    text-align: center;
 }
 
 .metodologia-content h2 {
@@ -272,16 +273,18 @@ a {
 .container-footer {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centralizado */
+    align-items: center; /* Centralizado horizontalmente */
+    justify-content: center; /* Centralizado verticalmente */
     gap: 40px;
     position: relative;
     z-index: 5; 
+    text-align: center;
 }
 
 .cafe-texto {
     width: 100%;
     max-width: 800px;
-    text-align: center; /* Centralizado */
+    text-align: center;
     color: white;
 }
 
@@ -307,7 +310,8 @@ a {
 .footer-links {
     font-size: 18px;
     color: white;
-    text-align: center; /* Centralizado */
+    text-align: center;
+    width: 100%;
 }
 
 .footer-links a {
