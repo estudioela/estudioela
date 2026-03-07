@@ -4,11 +4,10 @@ document.addEventListener("DOMContentLoaded", () => {
     
     editorialTitles.forEach(title => {
         const text = title.innerHTML;
-        // Ignora tags HTML dentro do h2 e substitui apenas as letras
         title.innerHTML = text.replace(/(?![^<]*>)([aeiouáéíóúãõâêîôû])/gi, '<span class="vowel">$1</span>');
     });
 
-    // 2. Click suave
+    // 2. Scroll suave do Hero
     const scrollBtn = document.getElementById("scroll-down");
     if(scrollBtn) {
         scrollBtn.addEventListener("click", () => {
@@ -18,4 +17,32 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    // 3. Animações GSAP Editoriais (Fade-up)
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Revela os elementos e remove o visibility hidden
+    gsap.set(".gsap-fade", { visibility: "visible" });
+
+    const fadeElements = document.querySelectorAll(".gsap-fade");
+
+    fadeElements.forEach((el) => {
+        gsap.fromTo(el, 
+            { 
+                y: 40, 
+                opacity: 0 
+            },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top 85%", // Inicia quando o topo do elemento atinge 85% da tela
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+    });
 });
