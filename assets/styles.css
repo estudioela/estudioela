@@ -59,7 +59,7 @@ a {
     top: 50%;
     left: 50%;
     min-width: 100%;
-    min-height: 120%; /* Sobra para o Parallax */
+    min-height: 120%;
     width: auto;
     height: auto;
     transform: translate(-50%, -50%);
@@ -81,16 +81,18 @@ a {
     align-items: flex-start;
 }
 
-/* Fix do Logo: Apenas controla a largura máxima e deixa a altura fluir */
 .logo-link {
     display: inline-block;
 }
 
+/* Fix extra contra corte do logo */
 .logo {
     width: 100%;
-    max-width: 80px;
+    max-width: 90px; 
     height: auto; 
     display: block;
+    padding: 4px; /* Evita que o filtro coma a borda do SVG */
+    overflow: visible;
     filter: brightness(0) saturate(100%) invert(13%) sepia(93%) saturate(6001%) hue-rotate(348deg) brightness(88%) contrast(114%);
 }
 
@@ -102,7 +104,6 @@ a {
     margin-top: 10px; 
 }
 
-/* Efeito moderno no hover do menu */
 .nav-link {
     font-family: "acumin-pro", sans-serif;
     font-size: 15px;
@@ -135,49 +136,41 @@ a {
 
 .scroll-indicator {
     position: absolute;
-    bottom: 60px;
+    bottom: 4vh; /* Força a seta a ficar dentro da tela independente do tamanho */
     left: 50%;
     transform: translateX(-50%);
-    z-index: 10;
+    z-index: 20;
     cursor: pointer;
 }
 
 /* --- DOBRA 2 (NORTE) --- */
 .section-light {
-    padding: 100px 0; /* Respiro reduzido */
+    padding: 100px 0;
     background: var(--bg-white);
     position: relative;
 }
 
 .pt-zero {
-    padding-top: 0; /* Remove excesso entre Norte e Arquitetura */
+    padding-top: 0;
 }
 
 .norte-grid {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 80px; /* Reduzido de 179px */
+    gap: 80px;
 }
 
 .norte-col-left {
     width: 349px;
     flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+    display: block;
 }
 
 .norte-col-left h2 {
     color: var(--accent);
     font-size: 70px;
     line-height: 1.1;
-}
-
-.norte-icon {
-    width: 280px;
-    height: auto;
-    display: block;
 }
 
 .norte-col-right {
@@ -203,18 +196,18 @@ a {
     color: var(--accent);
     font-size: 70px;
     line-height: 1.1;
-    margin-bottom: 60px; /* Reduzido */
+    margin-bottom: 60px;
 }
 
 .arq-bloco {
     width: 687px;
     display: flex;
     flex-direction: column;
-    gap: 50px; /* Reduzido */
+    gap: 50px;
 }
 
 .arq-bloco-left {
-    margin-bottom: 80px; /* Reduzido */
+    margin-bottom: 80px;
 }
 
 .arq-bloco-right {
@@ -241,14 +234,15 @@ a {
 .section-red {
     background-color: var(--accent);
     color: var(--bg-white);
-    padding: 100px 0 0 0; /* Padding inferior zero para o logo colar embaixo */
+    padding: 160px 0 0 0;
     position: relative;
+    overflow: hidden; /* Impede scroll lateral gerado pelo logo sangrando */
 }
 
 .container-metodologia {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 120px; /* Reduzido */
+    margin-bottom: 120px;
 }
 
 .metodologia-content {
@@ -257,6 +251,8 @@ a {
     display: flex;
     flex-direction: column;
     gap: 24px;
+    position: relative;
+    z-index: 5;
 }
 
 .metodologia-content h2 {
@@ -280,10 +276,10 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 50px;
-    padding-bottom: 180px; /* Espaço para o logo de sangramento */
+    gap: 60px;
+    padding-bottom: 400px; /* Cria espaço extra para o logo sangrar embaixo */
     position: relative;
-    z-index: 2; /* Fica acima do logo de fundo */
+    z-index: 5; 
 }
 
 .title-center {
@@ -302,7 +298,6 @@ a {
     font-weight: 300;
 }
 
-/* Efeito magnético moderno no botão */
 .btn-agendar {
     display: inline-flex;
     justify-content: center;
@@ -314,8 +309,8 @@ a {
     border-radius: 24px;
     font-size: 15px;
     font-weight: 700;
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-    box-shadow: 0 4px 15px rgba(0,0,0,0);
+    text-decoration: none;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s;
 }
 
 .btn-agendar:hover {
@@ -343,14 +338,14 @@ a {
 /* Logo de Sangramento (Bleed) */
 .footer-bleed {
     position: absolute;
-    bottom: -3%; /* Vaza um pouco pra fora da tela */
+    bottom: -15%; /* Sangra pra fora do container */
     left: 50%;
     transform: translateX(-50%);
-    width: 110%; /* Ligeiramente maior que a tela */
-    max-width: 1800px;
+    width: 140%;
+    min-width: 1500px;
     height: auto;
-    z-index: 1;
-    pointer-events: none; /* Não atrapalha o clique nos links */
+    z-index: 1; /* Fica atrás dos textos e botões */
+    pointer-events: none; 
 }
 
 /* GSAP Start States */
@@ -367,8 +362,8 @@ a {
     .arq-bloco { width: 100%; text-align: left; margin-left: 0; }
     .metodologia-content, .cafe-texto { width: 100%; text-align: left; }
     .title-center { font-size: 48px; text-align: left; }
-    .container-footer { align-items: flex-start; padding-bottom: 120px; }
-    .footer-bleed { width: 150%; bottom: 0; }
+    .container-footer { align-items: flex-start; padding-bottom: 250px; }
+    .footer-bleed { bottom: -5%; }
 }
 
 @media(max-width: 768px) {
