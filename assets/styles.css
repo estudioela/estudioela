@@ -85,12 +85,13 @@ a {
     display: inline-block;
 }
 
-/* Logo principal solto para não sofrer corte pelo filtro/viewBox */
+/* Solução Definitiva para o Logo Principal */
 .logo {
     width: 80px;
     height: auto; /* Mantém a proporção original do SVG */
     display: block;
-    overflow: visible;
+    overflow: visible; /* Garante que filtros ou sombras não sejam cortados */
+    padding: 4px; /* Padding de segurança interno para evitar cortes nas extremidades */
     filter: brightness(0) saturate(100%) invert(13%) sepia(93%) saturate(6001%) hue-rotate(348deg) brightness(88%) contrast(114%);
 }
 
@@ -239,17 +240,20 @@ a {
     overflow: hidden; /* Cobre todo o sangramento excedente do logo para não dar scroll lateral */
 }
 
+/* Centralização Absoluta da Última Dobra (Metodologia/Footer) */
 .container-metodologia {
     display: flex;
-    justify-content: flex-end;
-    margin-bottom: 100px; /* Respiro reduzido */
+    justify-content: center; /* Centralizado */
+    margin-bottom: 100px;
 }
 
 .metodologia-content {
-    width: 948px;
-    text-align: right;
+    width: 100%;
+    max-width: 948px;
+    text-align: center; /* Centralizado */
     display: flex;
     flex-direction: column;
+    align-items: center; /* Centralizado */
     gap: 20px;
     position: relative;
     z-index: 5;
@@ -262,13 +266,13 @@ a {
 }
 
 .metodologia-content h2 {
-    margin-bottom: 30px; /* Respiro reduzido */
+    margin-bottom: 30px;
 }
 
 .container-footer {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* Centralizado */
     gap: 40px;
     position: relative;
     z-index: 5; 
@@ -277,7 +281,7 @@ a {
 .cafe-texto {
     width: 100%;
     max-width: 800px;
-    text-align: center;
+    text-align: center; /* Centralizado */
     color: white;
 }
 
@@ -303,6 +307,7 @@ a {
 .footer-links {
     font-size: 18px;
     color: white;
+    text-align: center; /* Centralizado */
 }
 
 .footer-links a {
@@ -340,7 +345,17 @@ a {
     .container { padding: 0 40px; }
     .norte-grid { flex-direction: column; gap: 40px; }
     .norte-col-left, .norte-col-right, .arq-bloco { width: 100%; text-align: left; }
-    .metodologia-content { width: 100%; text-align: left; }
+    
+    /* Mantendo a centralização absoluta na última dobra mesmo em mobile */
+    .metodologia-content { width: 100%; text-align: center; align-items: center; }
     .title-center { font-size: 48px; }
     .footer-bleed { width: 150%; transform: translateY(10%); }
+}
+
+@media(max-width: 768px) {
+    .norte-col-left h2, .titulo-arquitetura, .metodologia-content h2, .title-center {
+        font-size: 42px;
+    }
+    .header { top: 30px; }
+    .nav-menu { margin-top: 5px; }
 }
