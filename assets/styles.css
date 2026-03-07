@@ -23,7 +23,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Tipografia Editorial Automática */
+/* Tipografia Editorial Automática (Só para Títulos Grandes) */
 .title-editorial {
     font-family: "ivypresto-display", serif;
     font-weight: 300;
@@ -67,13 +67,18 @@ body {
     z-index: 10;
 }
 
-.logo {
+/* Logo com Máscara Infalível para Cor */
+.logo-mask {
     height: 64px;
-    width: auto;
-    /* Força o SVG a assumir o vermelho Elã (#cd0005) */
-    filter: brightness(0) saturate(100%) invert(12%) sepia(99%) saturate(6226%) hue-rotate(351deg) brightness(96%) contrast(106%);
+    width: 140px;
+    background-color: var(--accent);
+    -webkit-mask: url('/assets/logo-ela.svg') no-repeat left center;
+    -webkit-mask-size: contain;
+    mask: url('/assets/logo-ela.svg') no-repeat left center;
+    mask-size: contain;
 }
 
+/* Menu Acumin */
 .nav-menu {
     display: flex;
     flex-direction: column;
@@ -83,19 +88,20 @@ body {
 }
 
 .nav-title {
-    font-size: 32px;
-    margin-bottom: 8px;
+    font-family: "acumin-pro", sans-serif;
+    font-size: 24px;
     font-weight: 700;
     color: var(--accent);
+    margin-bottom: 8px;
 }
 
 .nav-link {
+    font-family: "acumin-pro", sans-serif;
     font-size: 16px;
     color: var(--accent);
     text-decoration: none;
     line-height: 1.4;
     font-weight: 300;
-    transition: opacity 0.3s ease;
 }
 
 .nav-link:hover {
@@ -182,8 +188,8 @@ body {
 
 @media(max-width: 768px) {
     .header { padding: 32px 24px; }
-    .logo { height: 48px; }
-    .nav-title { font-size: 28px; }
+    .logo-mask { height: 48px; width: 100px; }
+    .nav-title { font-size: 20px; }
     .container { padding: 80px 24px; }
     .norte-col-left h2 { font-size: 40px; }
 }
