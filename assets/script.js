@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
     
     editorialTitles.forEach(title => {
         const text = title.innerHTML;
-        // Aplica classe vowel apenas em letras (ignorando tags HTML)
         title.innerHTML = text.replace(/(?![^<]*>)([aeiouáéíóúãõâêîôû])/gi, '<span class="vowel">$1</span>');
     });
 
@@ -22,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // 3. Animações Editoriais Modernas (GSAP)
     gsap.registerPlugin(ScrollTrigger);
 
-    // Revela elementos base
     gsap.set(".gsap-fade, .stagger-item", { visibility: "visible" });
 
     // Efeito Parallax sutil no vídeo do Hero
@@ -37,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Fade Up Simples para títulos e blocos isolados
+    // Fade Up Simples
     const fadeElements = document.querySelectorAll(".gsap-fade");
     fadeElements.forEach((el) => {
         gsap.fromTo(el, 
@@ -53,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     });
 
-    // Stagger (Cascata) para parágrafos textuais e listas
+    // Stagger (Cascata)
     const staggerGroups = document.querySelectorAll(".stagger-group");
     staggerGroups.forEach((group) => {
         const items = group.querySelectorAll(".stagger-item");
