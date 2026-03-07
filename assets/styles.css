@@ -1,6 +1,6 @@
 :root {
     --accent: #cd0005;
-    --text: #1f1f1f;
+    --text: #3a3838;
     --bg: #ffffff;
 }
 
@@ -23,6 +23,13 @@ body {
     overflow-x: hidden;
 }
 
+/* Container de Precisão: 1440px tela - (207px margem esq + 207px margem dir) = 1026px */
+.container {
+    width: 100%;
+    max-width: 1026px;
+    margin: 0 auto;
+}
+
 /* Tipografia Editorial Automática */
 .title-editorial {
     font-family: "ivypresto-display", serif;
@@ -39,6 +46,7 @@ body {
     position: relative;
     width: 100vw;
     height: 100vh;
+    min-height: 900px;
     overflow: hidden;
     background-color: #f3f3f3;
 }
@@ -56,31 +64,36 @@ body {
     z-index: 0;
 }
 
+/* Header alinhado exatamente ao Y:113 do Figma */
 .header {
     position: absolute;
-    top: 0;
+    top: 113px; 
     left: 0;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 48px 64px;
     z-index: 10;
 }
 
-.logo {
-    height: 64px;
-    width: auto;
-    /* Filtro ajustado para renderizar o tom #cd0005 */
-    filter: brightness(0) saturate(100%) invert(14%) sepia(93%) saturate(5412%) hue-rotate(348deg) brightness(91%) contrast(108%);
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
-/* Menu Lateral 25px */
+/* Logo cravado em 80x51 */
+.logo {
+    width: 80px;
+    height: 51px;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%) invert(13%) sepia(93%) saturate(6001%) hue-rotate(348deg) brightness(88%) contrast(114%);
+}
+
+/* Menu: Y:130 (17px abaixo do logo) e fonte 25px */
 .nav-menu {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 16px;
-    text-align: right;
+    gap: 21px;
+    padding-top: 17px; 
 }
 
 .nav-link {
@@ -88,9 +101,10 @@ body {
     font-size: 25px;
     color: var(--accent);
     text-decoration: none;
-    line-height: 1.2;
-    font-weight: 300;
-    transition: font-weight 0.2s ease;
+    line-height: 30px;
+    font-weight: 400;
+    text-align: right;
+    transition: font-weight 0.1s ease;
 }
 
 .nav-link:hover {
@@ -113,71 +127,70 @@ body {
     60% { transform: translateY(-5px) translateX(-50%); }
 }
 
-/* Container e Seção Norte */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 120px 40px;
-}
-
+/* Segunda Dobra: Norte */
 .norte-section {
-    min-height: 100vh;
+    padding: 150px 0;
     background: var(--bg);
-    display: flex;
-    align-items: center;
 }
 
 .norte-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: start;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
+/* Coluna Esquerda: Exatos 349px */
 .norte-col-left {
+    width: 349px;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 60px;
 }
 
 .norte-col-left h2 {
-    font-size: 64px;
-    line-height: 1.1;
+    font-size: 70px;
+    line-height: 80px;
 }
 
 .norte-icon {
-    width: 48px;
+    width: 340px;
     height: auto;
 }
 
+/* Coluna Direita: Exatos 496px */
 .norte-col-right {
+    width: 496px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    padding-top: 12px;
 }
 
 .norte-col-right p {
-    font-size: 24px;
-    line-height: 1.5;
-    color: #3a3838;
+    font-family: "acumin-pro", sans-serif;
+    font-size: 30px;
+    line-height: 36px;
+    font-weight: 300;
+    color: var(--text);
+    margin: 0;
 }
 
 .norte-col-right strong {
     font-weight: 700;
 }
 
-/* Responsivo */
-@media(max-width: 992px) {
-    .norte-grid { grid-template-columns: 1fr; gap: 48px; }
-    .norte-col-left h2 { font-size: 48px; }
-    .norte-col-right p { font-size: 20px; }
+/* Responsivo para não quebrar em notebooks menores */
+@media(max-width: 1100px) {
+    .container { padding: 0 40px; }
+    .norte-grid { flex-direction: column; gap: 80px; }
+    .norte-col-left, .norte-col-right { width: 100%; max-width: 600px; }
+    .norte-icon { width: 200px; }
 }
 
 @media(max-width: 768px) {
-    .header { padding: 32px 24px; }
-    .logo { height: 48px; }
+    .header { top: 40px; }
+    .container { padding: 0 24px; }
+    .logo { width: 60px; height: auto; }
     .nav-link { font-size: 20px; }
-    .container { padding: 80px 24px; }
-    .norte-col-left h2 { font-size: 40px; }
+    .norte-section { padding: 80px 0; }
+    .norte-col-left h2 { font-size: 48px; line-height: 56px; }
+    .norte-col-right p { font-size: 20px; line-height: 28px; }
 }
