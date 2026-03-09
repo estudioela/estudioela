@@ -274,7 +274,7 @@
             }
         }
 
-        // FUNÇÕES DE INTERFACE DO PORTAL (MANTIDAS INTACTAS)
+        // FUNÇÕES DE INTERFACE DO PORTAL
         function showTab(id, btn) {
             document.querySelectorAll('.tab-content').forEach(e => e.classList.remove('active'));
             document.querySelectorAll('.nav button').forEach(e => e.classList.remove('active'));
@@ -376,4 +376,137 @@
             let diasNoMes = new Date(ano, mes + 1, 0).getDate();
             let hojeReal = new Date();
 
-            let eventosMap =
+            let eventosMap = {};
+            globalData.datas.forEach(d => {
+                let dt = converterDataLocal(d.ATIVAÇÃO || d.ATIVACAO);
+                if(dt && dt.getMonth() === mes && dt.getFullYear() === ano) {
+                    let dia = dt.getDate();
+                    if(!eventosMap[dia]) eventosMap[dia] = [];
+                    eventosMap[dia].push({
+                        nome: normalizeText(d.INFLU_KEY),
+                        formato: formatarConteudo(d.CONTEUDO),
+                        hora: extrairHora(d.ATIVAÇÃO || d.ATIVACAO)
+                    });
+                }
+            });
+
+            let html = '';
+            for(let i=0; i<primeiroDia; i++) { html += `<div class="cal-cell"></div>`; }
+
+            for(let dia=1; dia<=diasNoMes; dia++) {
+                let isHoje = (dia === hojeReal.getDate() && mes === hojeReal.getMonth() && ano === hojeReal.getFullYear()) ? 'hoje' : '';
+                let evs = eventosMap[dia] || [];
+                
+                let evHtml = evs.map(e => {
+                    let cssCor = getClassTagFormato(e.formato);
+                    return `
+                        <div class="cal-tag ${cssCor}">
+                            ${e.formato}
+                            <div class="tooltip">
+                                <div style="font-weight:700; margin-bottom:2px;">${e.nome}</div>
+                                <div>${e.hora} - ${e.formato}</div>
+                            </div>
+                        </div>`;
+                }).join('');
+
+                html += `
+                    <div class="cal-cell">
+                        <div class="cal-date ${isHoje}">${dia}</div>
+                        ${evHtml}
+                    </div>`;
+            }
+
+            let celulasTotais = primeiroDia + diasNoMes;
+            let celulasFaltando = (7 - (celulasTotais % 7)) % 7;
+            for(let i=0; i<celulasFaltando; i++) { html += `<div class="cal-cell"></div>`; }
+
+            document.getElementById('cal-grid').innerHTML = html;
+        }
+
+        function renderPastas() {
+            let html = '';
+            globalData.pastas.forEach(p => {
+                let nomeLimpo = normalizeText(p.nome);
+                html += `
+                    <div class="card-padrao">
+                        <div class="card-title">${nomeLimpo}</div>
+                        <a href="${p.link || '#'}" target="_blank" class="btn-red">acessar pasta</a>
+                    </div>`;
+            });
+            document.getElementById('lista-pastas').innerHTML = html || '<p class="text-sec" style="text-align:center;">nenhuma pasta mapeada.</p>';
+        }
+
+        function renderDiaAdia() {
+            let hojeLimit = new Date(); 
+            hojeLimit.setHours(0,0,0,0);
+
+            let list = globalData.conteudos.filter(c => c.INFLU_KEY).map(c => {
+                let dtObj = converterDataLocal(c.DATA_ATIVACAO || c.DATA_ATIVACAO) || new Date(9999,0,1);
+                return { 
+                    ...c, dtObj: dtObj, nome: normalizeText(c.INFLU_KEY), formato: formatarConteudo(c.CONTEUDO),
+                    stAprov: normalizeText(c.STATUS_CONTEÚDO || c.STATUS_CONTEUDO || 'revisar'),
+                    stAtiv: normalizeText(c.STATUS_ATIVAÇÃO || c.STATUS_ATIVACAO)
+                };
+            });
+
+            let futuros = list.filter(c => c.dtObj >= hojeLimit).sort((a,b) => a.dtObj - b.dtObj);
+            let passados = list.filter(c => c.dtObj < hojeLimit).sort((a,b) => a.dtObj - b.dtObj);
+
+            let html = '';
+            if(futuros.length > 0) {
+                html += `<div class="sec-title">próximos</div>`;
+                futuros.forEach(c => html += buildDiaCard(c));
+            }
+            if(passados.length > 0) {
+                html += `<div class="sec-title">passados</div>`;
+                passados.forEach(c => html += buildDiaCard(c));
+            }
+            document.getElementById('lista-diadia').innerHTML = html || '<p class="text-sec" style="text-align:center;">nenhum conteúdo mapeado.</p>';
+        }
+
+        function buildDiaCard(c) {
+            let finalAprov = c.stAprov;
+            if(finalAprov.includes('drive ok')) finalAprov = 'aprovado';
+
+            let hAprov = `<span class="badge" style="${getCorStatusAprovacao(finalAprov)}">${finalAprov}</span>`;
+            let hAtiv = c.stAtiv ? `<span class="badge" style="${getCorStatusAtivacao(c.stAtiv)}">${c.stAtiv}</span>` : `<span class="badge" style="background-color: var(--accent);">revisar</span>`;
+
+            return `
+                <div class="card-padrao">
+                    <div class="card-top">
+                        <div class="card-info">
+                            <div class="card-title">${c.nome}</div>
+                            <div class="text-sec">${c.formato} • ativ: ${extrairHora(c.DATA_ATIVACAO)}</div>
+                        </div>
+                        <div class="card-badges">${hAprov}${hAtiv}</div>
+                    </div>
+                </div>`;
+        }
+
+        function renderPagamentos() {
+            let html = '';
+            globalData.pagamentos.filter(p => p.INFLU_KEY).forEach(p => {
+                let nomeLimpo = normalizeText(p.INFLU_KEY);
+                let statusRaw = normalizeText(p.STATUS);
+                let pix = normalizeText(p.CHAVE_PIX) || 'não cadastrado';
+
+                if (statusRaw) {
+                    html += `
+                        <div class="card-padrao">
+                            <div class="card-top">
+                                <div class="card-info">
+                                    <div class="card-title">${nomeLimpo}</div>
+                                    <div class="text-sec">pix: ${pix}</div>
+                                </div>
+                                <div class="card-badges">
+                                    <span class="badge" style="${getCorPagamento(statusRaw)}">${statusRaw}</span>
+                                </div>
+                            </div>
+                        </div>`;
+                }
+            });
+            document.getElementById('lista-pagamentos').innerHTML = html || '<p class="text-sec" style="text-align:center;">nenhum pagamento mapeado.</p>';
+        }
+    </script>
+</body>
+</html>
