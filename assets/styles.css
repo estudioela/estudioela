@@ -374,3 +374,13 @@ a {
     .header { top: 30px; }
     .nav-menu { margin-top: 5px; }
 }
+
+#arquitetura {
+    position: relative;
+    z-index: 1;
+}
+
+.section-red {
+    position: relative;
+    z-index: 10;
+}
