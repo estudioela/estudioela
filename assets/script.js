@@ -33,6 +33,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // Efeito de sobreposição (Cortina) da seção Metodologia sobre Arquitetura
+    gsap.to("#arquitetura", {
+        y: 150, // Move a seção branca para baixo lentamente criando o parallax
+        ease: "none",
+        scrollTrigger: {
+            trigger: "#metodologia",
+            start: "top bottom", // Dispara quando a vermelha aparece
+            end: "top top",      // Termina quando a vermelha chega no topo
+            scrub: true
+        }
+    });
+
     // Fade Up Simples
     const fadeElements = document.querySelectorAll(".gsap-fade");
     fadeElements.forEach((el) => {
