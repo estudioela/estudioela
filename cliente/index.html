@@ -10,21 +10,10 @@
 
     <style>
         :root {
-            --bg: #f3f3f3; 
-            --card: #ffffff; 
-            --text: #1f1f1f; 
-            --muted: #666666;
-            --line: rgba(205,0,5,.16); 
-            --accent: #cd0005; 
-            --accent-dark: #a80004;
-            /* Paleta Elã para Status e Tags */
-            --status-ok: #274f19; 
-            --status-drive: #602f9c; 
-            --status-warn: #f0913d; 
-            --status-aberto: #8a8a8a;
-            --tag-reel: #cd0005;
-            --tag-carrossel: #1f1f1f;
-            --tag-stories: #666666;
+            --bg: #f3f3f3; --card: #ffffff; --text: #1f1f1f; --muted: #666666;
+            --line: rgba(205,0,5,.16); --accent: #cd0005; --accent-dark: #a80004;
+            --status-ok: #274f19; --status-drive: #602f9c; --status-warn: #f0913d; --status-aberto: #8a8a8a;
+            --tag-reel: #cd0005; --tag-carrossel: #1f1f1f; --tag-stories: #666666;
         }
 
         * { box-sizing: border-box; }
@@ -58,11 +47,14 @@
         .tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* CARDS */
+        /* CARDS E ELEMENTOS COMUNS */
         .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
         .card-padrao { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; transition: transform 0.2s;}
         .card-title { font-size: 16px; font-weight: 700; color: var(--text);}
         .badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; color: #ffffff; text-transform: uppercase;}
+        .sec-title { font-family: "ivypresto-display", serif; font-size: 24px; color: var(--accent); margin: 24px 0 12px 0; border-bottom: 1px solid var(--line); padding-bottom: 8px; font-weight: 300; }
+        .btn-red { background: var(--accent); color: #fff; padding: 12px; border-radius: 8px; text-align: center; font-weight: 600; font-size: 14px; display: block; text-decoration: none; transition: background 0.2s; }
+        .btn-red:hover { background: var(--accent-dark); }
 
         /* CALENDÁRIO */
         .cal-wrapper { background: var(--card); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.02);}
@@ -106,7 +98,7 @@
     <div id="view-portal">
         <div class="header">
             <img src="/assets/logo-ela.svg" alt="Elã" class="header-logo">
-            <button onclick="sair()" style="background:none; border:none; cursor:pointer; color:var(--muted); font-family: inherit;">sair</button>
+            <button onclick="sair()" style="background:none; border:none; cursor:pointer; color:var(--muted); font-family: inherit; font-weight:600;">sair</button>
         </div>
 
         <div class="nav">
@@ -133,9 +125,15 @@
                     <div class="mes-grid" id="cal-grid"></div>
                 </div>
             </div>
-            <div id="tab-conteudos" class="tab-content"><div class="grid-cards" id="lista-pastas"></div></div>
-            <div id="tab-diadia" class="tab-content"><div class="grid-cards" id="lista-diadia"></div></div>
-            <div id="tab-pagamentos" class="tab-content"><div class="grid-cards" id="lista-pagamentos"></div></div>
+            <div id="tab-conteudos" class="tab-content">
+                <div class="grid-cards" id="lista-pastas"></div>
+            </div>
+            <div id="tab-diadia" class="tab-content">
+                <div class="grid-cards" id="lista-diadia"></div>
+            </div>
+            <div id="tab-pagamentos" class="tab-content">
+                <div class="grid-cards" id="lista-pagamentos"></div>
+            </div>
         </div>
     </div>
 
@@ -196,6 +194,28 @@
 
         function normalizeText(str) { return str ? str.toString().toLowerCase().trim() : ""; }
 
+        function formatarNomeConteudo(str) {
+            let s = normalizeText(str);
+            if(s.includes('stori')) return 'stories';
+            if(s.includes('reel')) return 'reel';
+            if(s.includes('carros') || s.includes('carous')) return 'carrossel';
+            // Se for outro formato, remove _1, _2 para deixar limpo
+            return s.replace(/_\d+/g, '').trim(); 
+        }
+
+        function parseDataBR(dataStr) {
+            if(!dataStr) return new Date(9999, 11, 31); 
+            let parts = dataStr.split(/[\s/:]+/); 
+            if(parts.length >= 3) {
+                let d = parseInt(parts[0]);
+                let m = parseInt(parts[1]) - 1;
+                let y = parseInt(parts[2]);
+                if(y < 100) y += 2000;
+                return new Date(y, m, d);
+            }
+            return new Date(9999, 11, 31);
+        }
+
         function getCorStatus(str) {
             let s = normalizeText(str);
             if(s.includes('aprovado') || s.includes('ok') || s.includes('pago')) return "#274f19";
@@ -226,16 +246,18 @@
             for(let dia=1; dia<=diasNoMes; dia++) {
                 let isHoje = (dia === hoje.getDate() && mes === hoje.getMonth() && ano === hoje.getFullYear()) ? 'hoje' : '';
                 
-                let evs = (globalData.datas || []).filter(d => {
-                    let dateStr = d['ATIVAÇÃO'] || d['ATIVACAO'] || "";
-                    let parts = dateStr.split('/');
-                    if(parts.length < 3) return false;
-                    return parseInt(parts[0]) === dia && parseInt(parts[1]) === (mes+1) && parts[2].includes(ano.toString());
-                });
+                let evs = (globalData.datas || [])
+                    .filter(d => d['INFLU_KEY'] && d['INFLU_KEY'].toString().trim() !== '')
+                    .filter(d => {
+                        let dateStr = d['ATIVAÇÃO'] || d['ATIVACAO'] || "";
+                        let parts = dateStr.split('/');
+                        if(parts.length < 3) return false;
+                        return parseInt(parts[0]) === dia && parseInt(parts[1]) === (mes+1) && parts[2].includes(ano.toString());
+                    });
                 
                 let evHtml = evs.map(e => `
                     <div class="cal-tag ${getTagClass(e['CONTEUDO'])}">
-                        ${normalizeText(e['CONTEUDO'])}
+                        ${formatarNomeConteudo(e['CONTEUDO'])}
                         <div class="tooltip">${normalizeText(e['INFLU_KEY'])}</div>
                     </div>`).join('');
                     
@@ -245,64 +267,94 @@
         }
 
         function renderPastas() {
-            const pastasHtml = (globalData.pastas || []).map(p => {
-                // Mapeando do CSV (PASTA_DRIVE_LINK e INFLU_KEY)
-                const nome = p['nome'] || p['INFLU_KEY'] || 'Pasta';
-                const link = p['link'] || p['PASTA_DRIVE_LINK'] || '#';
-                
-                return `
-                <div class="card-padrao">
-                    <div class="card-title">${normalizeText(nome)}</div>
-                    <a href="${link}" target="_blank" class="btn-cliente">abrir drive</a>
-                </div>`;
-            }).join('');
+            const pastasHtml = (globalData.pastas || [])
+                .filter(p => p['INFLU_KEY'] && p['INFLU_KEY'].toString().trim() !== '') // Bloqueia linhas em branco
+                .map(p => {
+                    const nome = p['nome'] || p['INFLU_KEY'] || 'Pasta';
+                    const link = p['link'] || p['PASTA_DRIVE_LINK'] || '#';
+                    
+                    return `
+                    <div class="card-padrao">
+                        <div class="card-title">${normalizeText(nome)}</div>
+                        <a href="${link}" target="_blank" class="btn-red">abrir drive</a>
+                    </div>`;
+                }).join('');
             
             document.getElementById('lista-pastas').innerHTML = pastasHtml || '<p class="text-sec" style="grid-column: 1/-1; text-align:center;">nenhuma pasta mapeada.</p>';
         }
 
-        function renderDiaAdia() {
-            const diaDiaHtml = (globalData.conteudos || []).map(c => {
-                // Compatibilidade com os nomes das colunas com/sem acento no ERP
-                const influ = c['INFLU_KEY'] || 'Desconhecido';
-                const statusConteudo = c['STATUS CONTEÚDO'] || c['STATUS CONTEUDO'] || 'em aberto';
-                const conteudo = c['CONTEUDO'] || '';
-                const dataAtivacao = c['DATA_ATIVACAO'] || c['DATA ATIVAÇÃO'] || '';
-                
-                return `
-                <div class="card-padrao">
-                    <div style="display:flex; justify-content:space-between">
-                        <div class="card-title">${normalizeText(influ)}</div>
-                        <div class="badge" style="background:${getCorStatus(statusConteudo)}">${normalizeText(statusConteudo)}</div>
-                    </div>
-                    <div style="font-size:12px; color:var(--muted)">${normalizeText(conteudo)} • ${dataAtivacao}</div>
-                </div>`;
-            }).join('');
+        function buildDiaDiaCard(c) {
+            const influ = c['INFLU_KEY'] || 'Desconhecido';
+            const statusConteudo = c['STATUS CONTEÚDO'] || c['STATUS CONTEUDO'] || 'em aberto';
+            const conteudo = c['CONTEUDO'] || '';
+            const dataAtivacao = c['DATA_ATIVACAO'] || c['DATA ATIVAÇÃO'] || '';
             
-            document.getElementById('lista-diadia').innerHTML = diaDiaHtml || '<p class="text-sec" style="grid-column: 1/-1; text-align:center;">nenhum conteúdo mapeado.</p>';
+            return `
+            <div class="card-padrao">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                    <div class="card-title">${normalizeText(influ)}</div>
+                    <div class="badge" style="background:${getCorStatus(statusConteudo)}">${normalizeText(statusConteudo)}</div>
+                </div>
+                <div style="font-size:12px; color:var(--muted); margin-top:8px;">
+                    ${formatarNomeConteudo(conteudo)} • ${dataAtivacao}
+                </div>
+            </div>`;
+        }
+
+        function renderDiaAdia() {
+            let hoje = new Date();
+            hoje.setHours(0,0,0,0);
+            
+            // Bloqueia as linhas que estão apagadas mas a planilha continua mandando "fantasmas"
+            let validos = (globalData.conteudos || []).filter(c => c['INFLU_KEY'] && c['INFLU_KEY'].toString().trim() !== '');
+            
+            let comDatas = validos.map(c => {
+                let d = c['DATA_ATIVACAO'] || c['DATA ATIVAÇÃO'] || '';
+                c._dt = parseDataBR(d);
+                return c;
+            });
+            
+            // Ordena os Próximos (dos mais próximos pros mais distantes)
+            let proximos = comDatas.filter(c => c._dt >= hoje).sort((a,b) => a._dt - b._dt);
+            // Ordena os Passados (dos mais recentes pros mais antigos)
+            let passados = comDatas.filter(c => c._dt < hoje).sort((a,b) => b._dt - a._dt);
+            
+            let html = '';
+            if(proximos.length > 0) {
+                html += '<div class="sec-title" style="grid-column: 1/-1;">próximos</div>';
+                html += proximos.map(buildDiaDiaCard).join('');
+            }
+            if(passados.length > 0) {
+                html += '<div class="sec-title" style="grid-column: 1/-1;">passados</div>';
+                html += passados.map(buildDiaDiaCard).join('');
+            }
+            
+            document.getElementById('lista-diadia').innerHTML = html || '<p class="text-sec" style="grid-column: 1/-1; text-align:center;">nenhum conteúdo mapeado.</p>';
         }
 
         function renderPagamentos() {
-            const pgtosHtml = (globalData.pagamentos || []).map(p => {
-                // Mapeando exatamente como vem do ERP: VALOR_TOTAL, CHAVE_PIX, STATUS
-                const status = p['STATUS'] || 'em aberto';
-                const pix = p['CHAVE_PIX'] || p['CHAVE PIX'] || 'não informado';
-                const valor = p['VALOR_TOTAL'] || p['VALOR'] || '';
-                const nome = p['INFLU_KEY'] || 'Desconhecido';
+            const pgtosHtml = (globalData.pagamentos || [])
+                .filter(p => p['INFLU_KEY'] && p['INFLU_KEY'].toString().trim() !== '') // Filtra fantasmas tipo Nicole Bals
+                .map(p => {
+                    const status = p['STATUS'] || 'em aberto';
+                    const pix = p['CHAVE_PIX'] || p['CHAVE PIX'] || 'não informado';
+                    const valor = p['VALOR_TOTAL'] || p['VALOR'] || '';
+                    const nome = p['INFLU_KEY'] || 'Desconhecido';
 
-                return `
-                <div class="card-padrao">
-                    <div style="display:flex; justify-content:space-between; align-items: flex-start;">
-                        <div class="card-info">
-                            <div class="card-title">${normalizeText(nome)}</div>
-                            <div style="font-size:14px; font-weight:700; margin-top:4px;">${valor}</div>
+                    return `
+                    <div class="card-padrao">
+                        <div style="display:flex; justify-content:space-between; align-items: flex-start;">
+                            <div class="card-info">
+                                <div class="card-title">${normalizeText(nome)}</div>
+                                <div style="font-size:14px; font-weight:700; margin-top:4px;">${valor}</div>
+                            </div>
+                            <div class="badge" style="background:${getCorStatus(status)}">${normalizeText(status)}</div>
                         </div>
-                        <div class="badge" style="background:${getCorStatus(status)}">${normalizeText(status)}</div>
-                    </div>
-                    <div style="font-size:12px; color:var(--muted); border-top:1px solid var(--line); padding-top:12px; margin-top:4px;">
-                        pix: ${pix}
-                    </div>
-                </div>`;
-            }).join('');
+                        <div style="font-size:12px; color:var(--muted); border-top:1px solid var(--line); padding-top:12px; margin-top:4px;">
+                            pix: ${pix}
+                        </div>
+                    </div>`;
+                }).join('');
             
             document.getElementById('lista-pagamentos').innerHTML = pgtosHtml || '<p class="text-sec" style="grid-column: 1/-1; text-align:center;">nenhum pagamento mapeado.</p>';
         }
