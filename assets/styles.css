@@ -373,6 +373,23 @@ a {
     }
     .header { top: 30px; }
     .nav-menu { margin-top: 5px; }
+
+    /* Faz a primeira dobra ocupar 85% da tela, revelando a ponta da seção de baixo */
+    .hero {
+        height: 85svh; 
+        min-height: 400px;
+    }
+
+    /* Oculta a seta no mobile já que a próxima seção já estará visível */
+    .scroll-indicator {
+        display: none;
+    }
+
+    /* Destrava o limite do desktop e ajusta a proporção do logo no mobile */
+    .footer-bleed {
+        min-width: 0; 
+        width: 220%; /* Mantém o conceito de sangrar as bordas, mas legível */
+    }
 }
 
 #arquitetura {
