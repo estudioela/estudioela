@@ -82,15 +82,15 @@ a {
 }
 
 .logo-link {
-    display: flex;
-    align-items: center;
+    display: block;
 }
 
 .logo {
     width: 80px;
     height: auto; 
     display: block;
-    /* Removido o hack de margin/padding negativo e o line-height:0 que "comiam" a base */
+    padding-bottom: 6px; /* Força espaço extra na base para a renderização do SVG */
+    box-sizing: content-box; /* Garante que o padding expanda a caixa em vez de espremer o logo */
     filter: brightness(0) saturate(100%) invert(13%) sepia(93%) saturate(6001%) hue-rotate(348deg) brightness(88%) contrast(114%);
 }
 
