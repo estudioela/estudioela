@@ -331,16 +331,19 @@
 
         function getCorStatusAprovacao(str) {
             let s = normalizeText(str);
-            if(s.includes('aprovado') || s.includes('drive ok')) return "background-color: var(--status-ok);";
-            if(s.includes('falta drive')) return "background-color: var(--status-drive);";
-            return "background-color: var(--accent);";
+            if(s.includes('aprovado') || s.includes('drive ok')) return "background-color: #274f19;"; // Verde Escuro
+            if(s.includes('drive')) return "background-color: #602f9c;"; // Roxo (Falta Drive)
+            if(s.includes('altera')) return "background-color: #f0913d;"; // Laranja (Alteração)
+            if(s.includes('aberto')) return "background-color: #8a8a8a;"; // Cinza
+            return "background-color: var(--accent);"; // Vermelho Elã (Padrão/Erro)
         }
 
         function getCorStatusAtivacao(str) {
             let s = normalizeText(str);
-            if(s.includes('postado')) return "background-color: var(--status-ok);";
-            if(s.includes('atrasado')) return "background-color: var(--status-warn);";
-            return "background-color: var(--accent);";
+            if(s.includes('postado')) return "background-color: #274f19;"; // Verde Escuro
+            if(s.includes('atrasado')) return "background-color: #cd0005;"; // Vermelho (Atrasado)
+            if(s.includes('aberto')) return "background-color: #8a8a8a;"; // Cinza
+            return "background-color: #8a8a8a;"; // Cinza Padrão
         }
 
         function getCorPagamento(str) {
