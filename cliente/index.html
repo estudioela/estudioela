@@ -268,10 +268,10 @@
 
         function renderPastas() {
             const pastasHtml = (globalData.pastas || [])
-                .filter(p => p['INFLU_KEY'] && p['INFLU_KEY'].toString().trim() !== '') // Bloqueia linhas em branco
+                .filter(p => p.nome && p.nome.toString().trim() !== '') // Filtra usando o nome que o Apps Script já envia
                 .map(p => {
-                    const nome = p['nome'] || p['INFLU_KEY'] || 'Pasta';
-                    const link = p['link'] || p['PASTA_DRIVE_LINK'] || '#';
+                    const nome = p.nome || 'Pasta';
+                    const link = p.link || '#';
                     
                     return `
                     <div class="card-padrao">
@@ -282,7 +282,6 @@
             
             document.getElementById('lista-pastas').innerHTML = pastasHtml || '<p class="text-sec" style="grid-column: 1/-1; text-align:center;">nenhuma pasta mapeada.</p>';
         }
-
         function buildDiaDiaCard(c) {
             const influ = c['INFLU_KEY'] || 'Desconhecido';
             const statusConteudo = c['STATUS CONTEÚDO'] || c['STATUS CONTEUDO'] || 'em aberto';
