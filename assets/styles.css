@@ -24,6 +24,23 @@ body {
     overflow-x: hidden;
 }
 
+/* CLASSES DE TIPOGRAFIA MISTA */
+.ivy-italic {
+    font-family: "ivypresto-display", serif;
+    font-weight: 300;
+    font-style: italic;
+}
+
+.acumin-light {
+    font-family: "acumin-pro", sans-serif;
+    font-weight: 300;
+}
+
+.acumin-bold {
+    font-family: "acumin-pro", sans-serif;
+    font-weight: 700;
+}
+
 /* --- SELEÇÃO DE TEXTO INTELIGENTE --- */
 ::selection {
     background-color: var(--accent);
@@ -82,7 +99,7 @@ a {
     top: 50%;
     left: 50%;
     width: 100%;
-    height: 120%; /* Para o parallax */
+    height: 120%;
     transform: translate(-50%, -50%);
     object-fit: cover;
     z-index: 0;
@@ -162,22 +179,18 @@ a {
     cursor: pointer;
 }
 
-/* --- DOBRA 2 (NORTE) --- */
-.section-light {
-    padding: 100px 0;
-    background: var(--bg-white);
+/* --- ESPAÇAMENTO EDITORIAL (DOBRAS) --- */
+.section-light, .section-red {
+    padding: 140px 0; /* Respiro editorial maior */
     position: relative;
 }
 
-.pt-zero {
-    padding-top: 0;
-}
-
+/* --- DOBRA 2 (NORTE) --- */
 .norte-grid {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    gap: 60px;
+    align-items: center; /* Textos alinhados verticalmente ao centro */
+    gap: 80px;
 }
 
 .norte-col-left {
@@ -196,45 +209,34 @@ a {
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px; /* Mais respiro entre os parágrafos */
 }
 
 .norte-col-right p, .cafe-texto {
-    font-size: 18px;
-    line-height: 1.5;
+    font-size: 26px; /* Tamanho ajustado conforme original para impacto */
+    line-height: 1.4;
 }
 
 .norte-col-right p {
     color: var(--text-dark);
 }
 
-.norte-col-right strong, .metodologia-content strong {
-    font-weight: 700;
-}
-
-/* --- SEÇÕES VERMELHAS (COM GRADIENTE ANIMADO E FLUIDO) --- */
+/* --- SEÇÕES VERMELHAS E GRANULADO (NOISE) --- */
 .section-red {
-    /* Cria o movimento misturando seu vermelho e um tom mais escuro */
-    background: linear-gradient(135deg, var(--accent), #a80004, var(--accent));
-    background-size: 200% 200%;
-    animation: gradientFlow 15s ease infinite;
+    background-color: var(--accent);
     color: var(--bg-white);
-    padding: 120px 0 0 0;
-    position: relative;
     overflow: hidden; 
 }
 
-/* Keyframes para mover o gradiente de um lado pro outro sem parar */
-@keyframes gradientFlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* GRANULADO 100% FUNCIONAL */
+.section-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E");
 }
 
 .titulo-arquitetura {
     font-size: 70px;
     line-height: 1.1;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
 }
 
 /* ACORDEON STYLES */
@@ -246,7 +248,7 @@ a {
 
 .accordion-item {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 24px 0;
+    padding: 30px 0;
     cursor: pointer;
     transition: padding 0.3s ease;
 }
@@ -268,9 +270,10 @@ a {
     transform: translateX(5px);
 }
 
-.accordion-header h3 {
-    font-size: 30px;
-    font-weight: 700;
+.accordion-title {
+    font-family: "ivypresto-display", serif;
+    font-weight: 300;
+    font-size: 32px;
     margin: 0;
     line-height: 1.1;
 }
@@ -293,11 +296,11 @@ a {
 }
 
 .accordion-content p {
-    font-size: 18px;
+    font-size: 20px;
     line-height: 1.5;
     color: var(--bg-white);
     margin: 0;
-    padding-top: 15px;
+    padding-top: 20px;
     font-weight: 300;
 }
 
@@ -314,7 +317,7 @@ a {
     display: flex;
     flex-direction: column;
     align-items: flex-end; 
-    gap: 20px;
+    gap: 30px;
     position: relative;
     z-index: 5;
 }
@@ -323,12 +326,12 @@ a {
     font-size: 70px;
     line-height: 1.1;
     text-align: right;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .metodologia-content p {
-    font-size: 18px;
-    line-height: 1.5;
+    font-size: 26px;
+    line-height: 1.4;
 }
 
 /* --- FOOTER (ALINHADO À ESQUERDA) --- */
@@ -341,7 +344,6 @@ a {
     position: relative;
     z-index: 5; 
     text-align: left;
-    padding-bottom: 60px;
 }
 
 .container-footer h2 {
@@ -352,7 +354,7 @@ a {
 
 .cafe-texto {
     width: 100%;
-    max-width: 800px;
+    max-width: 900px;
     text-align: left; 
 }
 
@@ -390,6 +392,7 @@ a {
 
 .footer-links a {
     transition: opacity 0.2s ease;
+    font-weight: 400;
 }
 
 .footer-links a:hover {
@@ -417,7 +420,7 @@ a {
     visibility: hidden;
 }
 
-/* Responsivo */
+/* --- RESPONSIVO (MOBILE FIRST NA PRIORIDADE VISUAL) --- */
 @media(max-width: 1100px) {
     .container { padding: 0 40px; }
     .norte-grid { flex-direction: column; gap: 40px; }
@@ -426,11 +429,17 @@ a {
 }
 
 @media(max-width: 768px) {
+    .section-light, .section-red { padding: 80px 0; } /* Respiro menor no mobile */
+    
     .norte-col-left h2, .titulo-arquitetura, .metodologia-content h2, .container-footer h2 {
         font-size: 42px;
     }
-    .accordion-header h3 { font-size: 22px; }
+    
+    .norte-col-right p, .metodologia-content p, .cafe-texto { font-size: 20px; }
+    
+    .accordion-title { font-size: 24px; }
     .accordion-icon { font-size: 30px; }
+    
     .header { top: 30px; }
     .nav-menu { margin-top: 5px; }
 
@@ -448,11 +457,13 @@ a {
         width: 220%;
     }
     
+    /* Quebra o alinhamento para a esquerda no mobile (para a leitura ficar boa) */
     .container-metodologia { justify-content: flex-start; }
     .metodologia-content { align-items: flex-start; text-align: left; }
     .metodologia-content h2 { text-align: left; margin-bottom: 20px; }
 }
 
+/* GESTÃO DE CAMADAS PARA O EFEITO CORTINA */
 #sobre-nos { position: relative; z-index: 2; }
 #arquitetura { position: relative; z-index: 1; }
 #metodologia { position: relative; z-index: 3; }
