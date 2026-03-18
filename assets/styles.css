@@ -179,9 +179,9 @@ a {
     cursor: pointer;
 }
 
-/* --- ESPAÇAMENTO EDITORIAL (DOBRAS) --- */
+/* --- ESPAÇAMENTO EDITORIAL (DOBRAS COM MAIS RESPIRO) --- */
 .section-light, .section-red {
-    padding: 140px 0; /* Respiro editorial maior */
+    padding: 120px 0; 
     position: relative;
 }
 
@@ -189,18 +189,18 @@ a {
 .norte-grid {
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Textos alinhados verticalmente ao centro */
-    gap: 80px;
+    align-items: flex-start; /* Alinhamento ao topo para melhor leitura */
+    gap: 100px; /* Mais respiro entre as colunas */
 }
 
 .norte-col-left {
-    width: 349px;
+    width: 320px;
     flex-shrink: 0;
 }
 
 .norte-col-left h2 {
     color: var(--accent);
-    font-size: 70px;
+    font-size: 48px; /* 30% menor que os 70px originais */
     line-height: 1.1;
 }
 
@@ -209,32 +209,32 @@ a {
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    gap: 30px; /* Mais respiro entre os parágrafos */
-}
-
-.norte-col-right p, .cafe-texto {
-    font-size: 26px; /* Tamanho ajustado conforme original para impacto */
-    line-height: 1.4;
+    gap: 24px;
 }
 
 .norte-col-right p {
     color: var(--text-dark);
+    font-size: 18px; /* 30% menor e mais delicado */
+    line-height: 1.6; /* Mais respiro entre as linhas */
 }
 
-/* --- SEÇÕES VERMELHAS E GRANULADO (NOISE) --- */
+/* --- SEÇÕES VERMELHAS (FUNDO ANIMADO) --- */
 .section-red {
-    background-color: var(--accent);
+    background: linear-gradient(135deg, var(--accent), #9b0004, var(--accent));
+    background-size: 200% 200%;
+    animation: flowBackground 15s ease infinite;
     color: var(--bg-white);
     overflow: hidden; 
 }
 
-/* GRANULADO 100% FUNCIONAL */
-.section-noise {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E");
+@keyframes flowBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .titulo-arquitetura {
-    font-size: 70px;
+    font-size: 48px; /* 30% menor */
     line-height: 1.1;
     margin-bottom: 60px;
 }
@@ -248,7 +248,7 @@ a {
 
 .accordion-item {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 30px 0;
+    padding: 24px 0;
     cursor: pointer;
     transition: padding 0.3s ease;
 }
@@ -273,13 +273,13 @@ a {
 .accordion-title {
     font-family: "ivypresto-display", serif;
     font-weight: 300;
-    font-size: 32px;
+    font-size: 26px; /* Menor e mais delicado */
     margin: 0;
     line-height: 1.1;
 }
 
 .accordion-icon {
-    font-size: 40px;
+    font-size: 32px;
     font-weight: 300;
     line-height: 1;
     transition: transform 0.3s ease;
@@ -292,15 +292,15 @@ a {
 .accordion-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: max-height 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .accordion-content p {
-    font-size: 20px;
-    line-height: 1.5;
+    font-size: 16px; /* Mais delicado */
+    line-height: 1.6;
     color: var(--bg-white);
     margin: 0;
-    padding-top: 20px;
+    padding-top: 15px;
     font-weight: 300;
 }
 
@@ -312,57 +312,62 @@ a {
 
 .metodologia-content {
     width: 100%;
-    max-width: 850px;
+    max-width: 650px; /* Reduzido para dar mais respiro à esquerda */
     text-align: right; 
     display: flex;
     flex-direction: column;
     align-items: flex-end; 
-    gap: 30px;
+    gap: 24px;
     position: relative;
     z-index: 5;
 }
 
 .metodologia-content h2 {
-    font-size: 70px;
+    font-size: 48px; /* 30% menor */
     line-height: 1.1;
     text-align: right;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .metodologia-content p {
-    font-size: 26px;
-    line-height: 1.4;
+    font-size: 18px; /* 30% menor */
+    line-height: 1.6;
 }
 
-/* --- FOOTER (ALINHADO À ESQUERDA) --- */
+/* --- FOOTER (RESTAURADO AO CENTRO COMO NO ORIGINAL) --- */
 .container-footer {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center; /* Voltou pro centro */
     justify-content: center; 
-    gap: 40px;
+    gap: 30px;
     position: relative;
     z-index: 5; 
-    text-align: left;
+    text-align: center; /* Voltou pro centro */
 }
 
 .container-footer h2 {
-    font-size: 70px;
+    font-size: 48px; /* 30% menor */
     line-height: 1.1;
-    text-align: left;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .cafe-texto {
     width: 100%;
-    max-width: 900px;
-    text-align: left; 
+    max-width: 600px; /* Mais contido para ler melhor */
+    text-align: center; 
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 0 auto;
 }
 
 /* CONTAINER MAGNÉTICO DO BOTÃO */
 .magnetic-wrap {
     display: inline-block;
     padding: 30px; 
-    margin: -30px;
+    margin: 0;
 }
 
 .btn-agendar {
@@ -385,8 +390,8 @@ a {
 }
 
 .footer-links {
-    font-size: 18px;
-    text-align: left;
+    font-size: 16px; /* Mais delicado */
+    text-align: center;
     width: 100%;
 }
 
@@ -403,7 +408,7 @@ a {
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 60px; 
+    margin-top: 40px; 
     pointer-events: none;
 }
 
@@ -429,16 +434,16 @@ a {
 }
 
 @media(max-width: 768px) {
-    .section-light, .section-red { padding: 80px 0; } /* Respiro menor no mobile */
+    .section-light, .section-red { padding: 80px 0; } 
     
     .norte-col-left h2, .titulo-arquitetura, .metodologia-content h2, .container-footer h2 {
-        font-size: 42px;
+        font-size: 36px;
     }
     
-    .norte-col-right p, .metodologia-content p, .cafe-texto { font-size: 20px; }
+    .norte-col-right p, .metodologia-content p, .cafe-texto { font-size: 16px; }
     
-    .accordion-title { font-size: 24px; }
-    .accordion-icon { font-size: 30px; }
+    .accordion-title { font-size: 22px; }
+    .accordion-icon { font-size: 28px; }
     
     .header { top: 30px; }
     .nav-menu { margin-top: 5px; }
@@ -457,13 +462,11 @@ a {
         width: 220%;
     }
     
-    /* Quebra o alinhamento para a esquerda no mobile (para a leitura ficar boa) */
     .container-metodologia { justify-content: flex-start; }
-    .metodologia-content { align-items: flex-start; text-align: left; }
+    .metodologia-content { align-items: flex-start; text-align: left; max-width: 100%; }
     .metodologia-content h2 { text-align: left; margin-bottom: 20px; }
 }
 
-/* GESTÃO DE CAMADAS PARA O EFEITO CORTINA */
 #sobre-nos { position: relative; z-index: 2; }
 #arquitetura { position: relative; z-index: 1; }
 #metodologia { position: relative; z-index: 3; }
