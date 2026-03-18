@@ -69,19 +69,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         
         wrap.addEventListener('mouseleave', () => {
-            gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
+            gsap.to(btn, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.3)" });
         });
     });
 
-    // 5. Animações GSAP Refinadas
+    // 5. Animações GSAP Refinadas (Mais Movimento)
     gsap.registerPlugin(ScrollTrigger);
 
-    // Fade in do cabeçalho
+    // Fade in do cabeçalho mais lento
     gsap.to(".header-container .logo, .nav-link", {
         opacity: 1,
         visibility: "visible",
         y: 0,
-        duration: 1,
+        duration: 1.5,
         stagger: 0.1,
         ease: "power3.out",
         delay: 0.2
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Transição (Efeito Cortina) suavizada
+    // Transição (Efeito Cortina)
     gsap.to("#arquitetura", {
         yPercent: 15, 
         ease: "none",
@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Animação da ilustração no Footer
     gsap.fromTo(".footer-bleed",
-        { scale: 0.9, y: 50 },
+        { scale: 0.9, y: 80 },
         {
             scale: 1,
             y: 0,
@@ -129,16 +129,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     );
 
-    // Revelação dos Textos (Fade Up)
+    // Revelação dos Textos mais fluida (Fade Up)
     const fadeElements = document.querySelectorAll(".gsap-fade");
     fadeElements.forEach((el) => {
         gsap.fromTo(el, 
-            { y: 40, opacity: 0 }, 
+            { y: 60, opacity: 0 }, 
             {
-                y: 0, opacity: 1, duration: 1.2, ease: "power3.out",
+                y: 0, opacity: 1, duration: 1.5, ease: "power3.out",
                 scrollTrigger: { 
                     trigger: el, 
-                    start: "top 85%", 
+                    start: "top 90%", 
                     toggleActions: "play none none reverse" 
                 }
             }
@@ -150,12 +150,12 @@ document.addEventListener("DOMContentLoaded", () => {
     staggerGroups.forEach((group) => {
         const items = group.querySelectorAll(".stagger-item");
         gsap.fromTo(items, 
-            { y: 30, opacity: 0 }, 
+            { y: 50, opacity: 0 }, 
             {
-                y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power3.out",
+                y: 0, opacity: 1, duration: 1.2, stagger: 0.2, ease: "power3.out",
                 scrollTrigger: { 
                     trigger: group, 
-                    start: "top 80%", 
+                    start: "top 85%", 
                     toggleActions: "play none none reverse" 
                 }
             }
