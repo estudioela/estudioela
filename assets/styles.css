@@ -24,6 +24,24 @@ body {
     overflow-x: hidden;
 }
 
+/* --- SELEÇÃO DE TEXTO INTELIGENTE --- */
+::selection {
+    background-color: var(--accent);
+    color: var(--bg-white);
+}
+::-moz-selection {
+    background-color: var(--accent);
+    color: var(--bg-white);
+}
+.section-red ::selection, .section-red *::selection {
+    background-color: var(--bg-white);
+    color: var(--accent);
+}
+.section-red ::-moz-selection, .section-red *::-moz-selection {
+    background-color: var(--bg-white);
+    color: var(--accent);
+}
+
 .container {
     width: 100%;
     max-width: 1026px;
@@ -54,7 +72,6 @@ a {
     background-color: #f3f3f3;
 }
 
-/* FIX DE RESPONSIVIDADE E CENTRALIZAÇÃO DO VÍDEO */
 .hero-bg {
     position: absolute;
     top: 50%;
@@ -190,9 +207,12 @@ a {
     font-weight: 700;
 }
 
-/* --- DOBRA 3 (ARQUITETURA ACORDEON) --- */
+/* --- DOBRA 3 (ARQUITETURA ACORDEON) E SEÇÕES VERMELHAS (COM GRANULADO) --- */
 .section-red {
     background-color: var(--accent);
+    /* Filtro de Noise/Granulado em SVG para dar a pegada vintage */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+    color: var(--bg-white);
     padding: 120px 0 0 0;
     position: relative;
     overflow: hidden; 
@@ -256,31 +276,28 @@ a {
     font-weight: 300;
 }
 
-/* --- DOBRA 4 (METODOLOGIA) --- */
+/* --- DOBRA 4 (METODOLOGIA - ALINHADA À DIREITA) --- */
 .container-metodologia {
     display: flex;
-    justify-content: center; 
+    justify-content: flex-end; /* Alinha o bloco na margem direita */
 }
 
 .metodologia-content {
     width: 100%;
-    max-width: 948px;
-    text-align: center; 
+    max-width: 850px;
+    text-align: right; /* Alinha o texto à direita */
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: flex-end; /* Alinha os itens à direita */
     gap: 20px;
     position: relative;
     z-index: 5;
 }
 
-.metodologia-content h2, .title-center {
+.metodologia-content h2 {
     font-size: 70px;
     line-height: 1.1;
-    text-align: center;
-}
-
-.metodologia-content h2 {
+    text-align: right;
     margin-bottom: 30px;
 }
 
@@ -289,23 +306,29 @@ a {
     line-height: 1.5;
 }
 
-/* --- FOOTER --- */
+/* --- FOOTER (ALINHADO À ESQUERDA) --- */
 .container-footer {
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: flex-start; /* Alinhado à esquerda */
     justify-content: center; 
     gap: 40px;
     position: relative;
     z-index: 5; 
-    text-align: center;
+    text-align: left; /* Alinhado à esquerda */
     padding-bottom: 60px;
+}
+
+.container-footer h2 {
+    font-size: 70px;
+    line-height: 1.1;
+    text-align: left;
 }
 
 .cafe-texto {
     width: 100%;
     max-width: 800px;
-    text-align: center;
+    text-align: left; /* Alinhado à esquerda */
 }
 
 .btn-agendar {
@@ -329,7 +352,7 @@ a {
 
 .footer-links {
     font-size: 18px;
-    text-align: center;
+    text-align: left; /* Alinhado à esquerda */
     width: 100%;
 }
 
@@ -366,13 +389,11 @@ a {
     .container { padding: 0 40px; }
     .norte-grid { flex-direction: column; gap: 40px; }
     .norte-col-left, .norte-col-right { width: 100%; text-align: left; }
-    .metodologia-content { width: 100%; text-align: center; align-items: center; }
-    .title-center { font-size: 48px; }
     .footer-bleed { width: 150%; transform: translateY(10%); }
 }
 
 @media(max-width: 768px) {
-    .norte-col-left h2, .titulo-arquitetura, .metodologia-content h2, .title-center {
+    .norte-col-left h2, .titulo-arquitetura, .metodologia-content h2, .container-footer h2 {
         font-size: 42px;
     }
     .accordion-header h3 { font-size: 22px; }
@@ -393,6 +414,11 @@ a {
         min-width: 0; 
         width: 220%;
     }
+    
+    /* Quebra para a esquerda no mobile para não estragar a leitura */
+    .container-metodologia { justify-content: flex-start; }
+    .metodologia-content { align-items: flex-start; text-align: left; }
+    .metodologia-content h2 { text-align: left; margin-bottom: 20px; }
 }
 
 /* Z-INDEX SETUP PARA EFEITO CORTINA */
