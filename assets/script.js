@@ -15,10 +15,49 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 3. Animações GSAP
-    gsap.registerPlugin(ScrollTrigger);
+    // 3. Lógica do Acordeon (Arquitetura de Serviços)
+    const accordions = document.querySelectorAll('.accordion-item');
+    accordions.forEach(acc => {
+        const header = acc.querySelector('.accordion-header');
+        header.addEventListener('click', () => {
+            const isOpen = acc.classList.contains('active');
+            const content = acc.querySelector('.accordion-content');
+            
+            // Fecha todos os outros
+            accordions.forEach(a => {
+                a.classList.remove('active');
+                a.querySelector('.accordion-content').style.maxHeight = null;
+                a.querySelector('.accordion-icon').textContent = '+';
+            });
+            
+            // Abre o clicado se estiver fechado e tiver conteúdo
+            if (!isOpen && content.innerHTML.trim() !== "") {
+                acc.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + "px";
+                acc.querySelector('.accordion-icon').textContent = '-';
+            }
+        });
+    });
 
-    // Revela os itens para o JavaScript assumir
+    // Inicia o primeiro acordeon aberto por padrão (Branding)
+    const firstAcc = document.querySelector('.accordion-item');
+    if(firstAcc) {
+        firstAcc.classList.add('active');
+        const firstContent = firstAcc.querySelector('.accordion-content');
+        firstContent.style.maxHeight = firstContent.scrollHeight + "px";
+        firstAcc.querySelector('.accordion-icon').textContent = '-';
+    }
+
+    // Recalcula a altura do acordeon em caso de resize da tela
+    window.addEventListener('resize', () => {
+        const activeAcc = document.querySelector('.accordion-item.active .accordion-content');
+        if(activeAcc) {
+            activeAcc.style.maxHeight = activeAcc.scrollHeight + "px";
+        }
+    });
+
+    // 4. Animações GSAP
+    gsap.registerPlugin(ScrollTrigger);
     gsap.set(".gsap-fade, .stagger-item", { visibility: "visible" });
 
     // Parallax Sutil no Vídeo Hero
@@ -33,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Efeito de sobreposição (Cortina) da seção Metodologia sobre Arquitetura
+    // Efeito Cortina (Metodologia branca passando por cima da Arquitetura vermelha)
     gsap.to("#arquitetura", {
         y: 150, 
         ease: "none",
@@ -45,18 +84,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Animação de Zoom e Parallax do Logo Gigante no Footer
+    // Animação de Zoom Logo no Footer
     gsap.fromTo(".footer-bleed",
-        { scale: 0.8, y: 100 }, // Começa menor e mais para baixo
+        { scale: 0.8, y: 100 },
         {
             scale: 1,
             y: 0,
             ease: "none",
             scrollTrigger: {
                 trigger: ".footer-bleed-wrapper",
-                start: "top bottom", // Dispara quando o topo do bloco do logo entra na tela
-                end: "bottom bottom", // Termina de crescer no limite do scroll da página
-                scrub: true // Amarra o progresso da animação ao scroll
+                start: "top bottom", 
+                end: "bottom bottom",
+                scrub: true
             }
         }
     );
@@ -77,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     });
 
-    // Stagger (Efeito Cascata em blocos de texto)
+    // Stagger (Efeito Cascata em blocos)
     const staggerGroups = document.querySelectorAll(".stagger-group");
     staggerGroups.forEach((group) => {
         const items = group.querySelectorAll(".stagger-item");
