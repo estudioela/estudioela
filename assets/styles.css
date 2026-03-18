@@ -26,7 +26,7 @@ body {
 
 .container {
     width: 100%;
-    max-width: 1026px; /* Layout 1440 - margens 207 */
+    max-width: 1026px;
     margin: 0 auto;
 }
 
@@ -48,20 +48,19 @@ a {
 .hero {
     position: relative;
     width: 100vw;
-    height: 100vh; /* Força exatamente a altura da tela, garantindo a seta visível */
+    height: 100vh;
     min-height: 600px;
     overflow: hidden;
     background-color: #f3f3f3;
 }
 
+/* FIX DE RESPONSIVIDADE E CENTRALIZAÇÃO DO VÍDEO */
 .hero-bg {
     position: absolute;
     top: 50%;
     left: 50%;
-    min-width: 100%;
-    min-height: 120%; /* Sobra para o Parallax não revelar o fundo */
-    width: auto;
-    height: auto;
+    width: 100%;
+    height: 120%; /* Para o parallax */
     transform: translate(-50%, -50%);
     object-fit: cover;
     z-index: 0;
@@ -69,7 +68,7 @@ a {
 
 .header {
     position: absolute;
-    top: 60px; /* Reduzido respiro do topo */
+    top: 60px;
     left: 0;
     width: 100%;
     z-index: 10;
@@ -89,9 +88,17 @@ a {
     width: 80px;
     height: auto; 
     display: block;
-    padding-bottom: 6px; /* Força espaço extra na base para a renderização do SVG */
-    box-sizing: content-box; /* Garante que o padding expanda a caixa em vez de espremer o logo */
+    padding-bottom: 6px;
+    box-sizing: content-box;
     filter: brightness(0) saturate(100%) invert(13%) sepia(93%) saturate(6001%) hue-rotate(348deg) brightness(88%) contrast(114%);
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    margin-top: 10px; 
 }
 
 .nav-link {
@@ -99,27 +106,7 @@ a {
     font-size: 15px;
     color: var(--accent);
     line-height: 1.3;
-    font-weight: 600; /* Aumentado de 500 para 600 para dar mais peso */
-    text-align: right;
-    position: relative;
-    display: inline-block;
-    padding-bottom: 2px;
-}
-
-.nav-menu {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 12px; /* Respiro reduzido */
-    margin-top: 10px; 
-}
-
-.nav-link {
-    font-family: "acumin-pro", sans-serif;
-    font-size: 15px; /* Tamanho reduzido */
-    color: var(--accent);
-    line-height: 1.3;
-    font-weight: 500; /* Peso aumentado conforme solicitado */
+    font-weight: 600;
     text-align: right;
     position: relative;
     display: inline-block;
@@ -144,7 +131,6 @@ a {
     transform-origin: bottom left;
 }
 
-/* Seta amarrada ao fundo (30px do limite da tela) */
 .scroll-indicator {
     position: absolute;
     bottom: 30px;
@@ -156,7 +142,7 @@ a {
 
 /* --- DOBRA 2 (NORTE) --- */
 .section-light {
-    padding: 100px 0; /* Respiro vertical reduzido */
+    padding: 100px 0;
     background: var(--bg-white);
     position: relative;
 }
@@ -169,7 +155,7 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 60px; /* Respiro reduzido entre as colunas */
+    gap: 60px;
 }
 
 .norte-col-left {
@@ -188,74 +174,92 @@ a {
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Respiro reduzido entre os parágrafos */
+    gap: 20px;
 }
 
-/* Tamanho padrão para todos os textos de apoio */
-.norte-col-right p, .arq-item p, .metodologia-content p, .cafe-texto {
+.norte-col-right p, .cafe-texto {
     font-size: 18px;
     line-height: 1.5;
 }
 
-/* Cor preta para os textos do fundo claro */
-.norte-col-right p, .arq-item p {
+.norte-col-right p {
     color: var(--text-dark);
-}
-
-/* Cor branca para os textos do fundo vermelho */
-.metodologia-content p, .cafe-texto {
-    color: var(--bg-white);
 }
 
 .norte-col-right strong, .metodologia-content strong {
     font-weight: 700;
 }
 
-/* --- DOBRA 3 (ARQUITETURA) --- */
-.titulo-arquitetura {
-    color: var(--accent);
-    font-size: 70px;
-    line-height: 1.1;
-    margin-bottom: 50px; /* Respiro reduzido */
-}
-
-.arq-bloco {
-    width: 687px;
-    display: flex;
-    flex-direction: column;
-    gap: 40px; /* Respiro reduzido */
-}
-
-.arq-bloco-left {
-    margin-bottom: 60px;
-}
-
-.arq-bloco-right {
-    margin-left: auto;
-    text-align: right;
-}
-
-.arq-item h3 {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--text-black);
-    margin-bottom: 10px; /* Respiro reduzido */
-}
-
-/* --- DOBRA 4 & 5 (METODOLOGIA E FOOTER) --- */
+/* --- DOBRA 3 (ARQUITETURA ACORDEON) --- */
 .section-red {
     background-color: var(--accent);
-    color: var(--bg-white);
     padding: 120px 0 0 0;
     position: relative;
     overflow: hidden; 
 }
 
-/* Centralização Absoluta da Última Dobra (Metodologia/Footer) */
+.titulo-arquitetura {
+    font-size: 70px;
+    line-height: 1.1;
+    margin-bottom: 50px;
+}
+
+/* ACORDEON STYLES */
+.accordion-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.accordion-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 24px 0;
+    cursor: pointer;
+}
+
+.accordion-item:last-child {
+    border-bottom: none;
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--bg-white);
+}
+
+.accordion-header h3 {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.accordion-icon {
+    font-size: 40px;
+    font-weight: 300;
+    line-height: 1;
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.accordion-content p {
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--bg-white);
+    margin: 0;
+    padding-top: 15px;
+    font-weight: 300;
+}
+
+/* --- DOBRA 4 (METODOLOGIA) --- */
 .container-metodologia {
     display: flex;
     justify-content: center; 
-    margin-bottom: 100px;
 }
 
 .metodologia-content {
@@ -273,7 +277,6 @@ a {
 .metodologia-content h2, .title-center {
     font-size: 70px;
     line-height: 1.1;
-    color: var(--bg-white);
     text-align: center;
 }
 
@@ -281,6 +284,12 @@ a {
     margin-bottom: 30px;
 }
 
+.metodologia-content p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* --- FOOTER --- */
 .container-footer {
     display: flex;
     flex-direction: column;
@@ -297,7 +306,6 @@ a {
     width: 100%;
     max-width: 800px;
     text-align: center;
-    color: white;
 }
 
 .btn-agendar {
@@ -321,7 +329,6 @@ a {
 
 .footer-links {
     font-size: 18px;
-    color: white;
     text-align: center;
     width: 100%;
 }
@@ -334,7 +341,6 @@ a {
     opacity: 0.6;
 }
 
-/* Novo Wrapper de Sangramento (Footer Logo) */
 .footer-bleed-wrapper {
     width: 100%;
     display: flex;
@@ -350,7 +356,6 @@ a {
     display: block;
 }
 
-/* Estados iniciais do GSAP */
 .gsap-fade, .stagger-item {
     opacity: 0;
     visibility: hidden;
@@ -360,8 +365,7 @@ a {
 @media(max-width: 1100px) {
     .container { padding: 0 40px; }
     .norte-grid { flex-direction: column; gap: 40px; }
-    .norte-col-left, .norte-col-right, .arq-bloco { width: 100%; text-align: left; }
-    
+    .norte-col-left, .norte-col-right { width: 100%; text-align: left; }
     .metodologia-content { width: 100%; text-align: center; align-items: center; }
     .title-center { font-size: 48px; }
     .footer-bleed { width: 150%; transform: translateY(10%); }
@@ -371,33 +375,28 @@ a {
     .norte-col-left h2, .titulo-arquitetura, .metodologia-content h2, .title-center {
         font-size: 42px;
     }
+    .accordion-header h3 { font-size: 22px; }
+    .accordion-icon { font-size: 30px; }
     .header { top: 30px; }
     .nav-menu { margin-top: 5px; }
 
-    /* Faz a primeira dobra ocupar 85% da tela, revelando a ponta da seção de baixo */
     .hero {
         height: 85svh; 
         min-height: 400px;
     }
-
-    /* Oculta a seta no mobile já que a próxima seção já estará visível */
+    
     .scroll-indicator {
         display: none;
     }
 
-    /* Destrava o limite do desktop e ajusta a proporção do logo no mobile */
     .footer-bleed {
         min-width: 0; 
-        width: 220%; /* Mantém o conceito de sangrar as bordas, mas legível */
+        width: 220%;
     }
 }
 
-#arquitetura {
-    position: relative;
-    z-index: 1;
-}
-
-.section-red {
-    position: relative;
-    z-index: 10;
-}
+/* Z-INDEX SETUP PARA EFEITO CORTINA */
+#sobre-nos { position: relative; z-index: 2; }
+#arquitetura { position: relative; z-index: 1; }
+#metodologia { position: relative; z-index: 3; }
+#cafe { position: relative; z-index: 4; }
