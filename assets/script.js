@@ -58,6 +58,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 4. Animações GSAP
     gsap.registerPlugin(ScrollTrigger);
+
+    // Fade in do cabeçalho
+    gsap.to(".header-container .logo, .nav-link", {
+        opacity: 1,
+        visibility: "visible",
+        y: 0,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power3.out",
+        delay: 0.2 // Leve atraso para a página renderizar
+    });
+
     gsap.set(".gsap-fade, .stagger-item", { visibility: "visible" });
 
     // Parallax Sutil no Vídeo Hero
@@ -100,33 +112,33 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     );
 
-    // Fade Up Simples
+    // Fade Up com mais movimento para elementos soltos
     const fadeElements = document.querySelectorAll(".gsap-fade");
     fadeElements.forEach((el) => {
         gsap.fromTo(el, 
-            { y: 30, opacity: 0 },
+            { y: 50, opacity: 0 }, // Aumentado deslocamento Y inicial
             {
-                y: 0, opacity: 1, duration: 1, ease: "power3.out",
+                y: 0, opacity: 1, duration: 1.2, ease: "power4.out",
                 scrollTrigger: { 
                     trigger: el, 
-                    start: "top 90%", 
+                    start: "top 85%", 
                     toggleActions: "play none none reverse" 
                 }
             }
         );
     });
 
-    // Stagger (Efeito Cascata em blocos)
+    // Stagger (Efeito Cascata em blocos) com mais deslocamento
     const staggerGroups = document.querySelectorAll(".stagger-group");
     staggerGroups.forEach((group) => {
         const items = group.querySelectorAll(".stagger-item");
         gsap.fromTo(items, 
-            { y: 20, opacity: 0 },
+            { y: 40, opacity: 0 }, // Aumentado deslocamento Y inicial
             {
-                y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out",
+                y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power3.out",
                 scrollTrigger: { 
                     trigger: group, 
-                    start: "top 85%", 
+                    start: "top 80%", 
                     toggleActions: "play none none reverse" 
                 }
             }
