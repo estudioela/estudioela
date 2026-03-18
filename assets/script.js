@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Automação de Vogais (IvyPresto Display)
+    // 1. Automação de Vogais em Itálico (IvyPresto Display)
     const editorialTitles = document.querySelectorAll('.title-editorial');
     editorialTitles.forEach(title => {
         const text = title.innerHTML;
@@ -23,12 +23,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const isOpen = acc.classList.contains('active');
             const content = acc.querySelector('.accordion-content');
             
+            // Fecha os outros
             accordions.forEach(a => {
                 a.classList.remove('active');
                 a.querySelector('.accordion-content').style.maxHeight = null;
                 a.querySelector('.accordion-icon').textContent = '+';
             });
             
+            // Abre o clicado
             if (!isOpen && content.innerHTML.trim() !== "") {
                 acc.classList.add('active');
                 content.style.maxHeight = content.scrollHeight + "px";
@@ -37,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // Abre o primeiro item do acordeon por padrão
     const firstAcc = document.querySelector('.accordion-item');
     if(firstAcc) {
         firstAcc.classList.add('active');
@@ -45,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
         firstAcc.querySelector('.accordion-icon').textContent = '-';
     }
 
+    // Recalcula altura no resize
     window.addEventListener('resize', () => {
         const activeAcc = document.querySelector('.accordion-item.active .accordion-content');
         if(activeAcc) {
@@ -52,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 4. Efeito Botão Magnético
+    // 4. Efeito Botão Magnético Premium
     const magnetics = document.querySelectorAll('.magnetic-wrap');
     magnetics.forEach(wrap => {
         const btn = wrap.querySelector('.magnetic-btn');
@@ -61,20 +65,18 @@ document.addEventListener("DOMContentLoaded", () => {
             const rect = wrap.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
-            // Move o botão ligeiramente na direção do rato
             gsap.to(btn, { x: x * 0.4, y: y * 0.4, duration: 0.3, ease: "power2.out" });
         });
         
         wrap.addEventListener('mouseleave', () => {
-            // Efeito de "mola" ao soltar
             gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
         });
     });
 
-    // 5. Animações GSAP
+    // 5. Animações GSAP Refinadas
     gsap.registerPlugin(ScrollTrigger);
 
-    // Fade in suave do cabeçalho
+    // Fade in do cabeçalho
     gsap.to(".header-container .logo, .nav-link", {
         opacity: 1,
         visibility: "visible",
@@ -87,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     gsap.set(".gsap-fade, .stagger-item", { visibility: "visible" });
 
-    // Parallax Sutil no Vídeo Hero
+    // Parallax no Vídeo Hero
     gsap.to(".hero-bg", {
         yPercent: 20,
         ease: "none",
@@ -99,9 +101,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Efeito Cortina (Metodologia)
+    // Transição (Efeito Cortina) suavizada
     gsap.to("#arquitetura", {
-        y: 150, 
+        yPercent: 15, 
         ease: "none",
         scrollTrigger: {
             trigger: "#metodologia",
@@ -111,9 +113,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Animação de Zoom Logo no Footer
+    // Animação da ilustração no Footer
     gsap.fromTo(".footer-bleed",
-        { scale: 0.8, y: 100 },
+        { scale: 0.9, y: 50 },
         {
             scale: 1,
             y: 0,
@@ -127,13 +129,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     );
 
-    // Fade Up com mais movimento elástico
+    // Revelação dos Textos (Fade Up)
     const fadeElements = document.querySelectorAll(".gsap-fade");
     fadeElements.forEach((el) => {
         gsap.fromTo(el, 
-            { y: 50, opacity: 0 }, 
+            { y: 40, opacity: 0 }, 
             {
-                y: 0, opacity: 1, duration: 1.2, ease: "power4.out",
+                y: 0, opacity: 1, duration: 1.2, ease: "power3.out",
                 scrollTrigger: { 
                     trigger: el, 
                     start: "top 85%", 
@@ -143,12 +145,12 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     });
 
-    // Stagger (Efeito Cascata)
+    // Revelação em Cascata (Stagger) para os parágrafos
     const staggerGroups = document.querySelectorAll(".stagger-group");
     staggerGroups.forEach((group) => {
         const items = group.querySelectorAll(".stagger-item");
         gsap.fromTo(items, 
-            { y: 40, opacity: 0 }, 
+            { y: 30, opacity: 0 }, 
             {
                 y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power3.out",
                 scrollTrigger: { 
