@@ -23,14 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const isOpen = acc.classList.contains('active');
             const content = acc.querySelector('.accordion-content');
             
-            // Fecha todos os outros
             accordions.forEach(a => {
                 a.classList.remove('active');
                 a.querySelector('.accordion-content').style.maxHeight = null;
                 a.querySelector('.accordion-icon').textContent = '+';
             });
             
-            // Abre o clicado se estiver fechado e tiver conteúdo
             if (!isOpen && content.innerHTML.trim() !== "") {
                 acc.classList.add('active');
                 content.style.maxHeight = content.scrollHeight + "px";
@@ -39,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Inicia o primeiro acordeon aberto por padrão (Branding)
     const firstAcc = document.querySelector('.accordion-item');
     if(firstAcc) {
         firstAcc.classList.add('active');
@@ -48,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
         firstAcc.querySelector('.accordion-icon').textContent = '-';
     }
 
-    // Recalcula a altura do acordeon em caso de resize da tela
     window.addEventListener('resize', () => {
         const activeAcc = document.querySelector('.accordion-item.active .accordion-content');
         if(activeAcc) {
@@ -56,10 +52,29 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 4. Animações GSAP
+    // 4. Efeito Botão Magnético
+    const magnetics = document.querySelectorAll('.magnetic-wrap');
+    magnetics.forEach(wrap => {
+        const btn = wrap.querySelector('.magnetic-btn');
+        
+        wrap.addEventListener('mousemove', (e) => {
+            const rect = wrap.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            // Move o botão ligeiramente na direção do rato
+            gsap.to(btn, { x: x * 0.4, y: y * 0.4, duration: 0.3, ease: "power2.out" });
+        });
+        
+        wrap.addEventListener('mouseleave', () => {
+            // Efeito de "mola" ao soltar
+            gsap.to(btn, { x: 0, y: 0, duration: 0.7, ease: "elastic.out(1, 0.3)" });
+        });
+    });
+
+    // 5. Animações GSAP
     gsap.registerPlugin(ScrollTrigger);
 
-    // Fade in do cabeçalho
+    // Fade in suave do cabeçalho
     gsap.to(".header-container .logo, .nav-link", {
         opacity: 1,
         visibility: "visible",
@@ -67,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
         duration: 1,
         stagger: 0.1,
         ease: "power3.out",
-        delay: 0.2 // Leve atraso para a página renderizar
+        delay: 0.2
     });
 
     gsap.set(".gsap-fade, .stagger-item", { visibility: "visible" });
@@ -84,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Efeito Cortina (Metodologia branca passando por cima da Arquitetura vermelha)
+    // Efeito Cortina (Metodologia)
     gsap.to("#arquitetura", {
         y: 150, 
         ease: "none",
@@ -112,11 +127,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     );
 
-    // Fade Up com mais movimento para elementos soltos
+    // Fade Up com mais movimento elástico
     const fadeElements = document.querySelectorAll(".gsap-fade");
     fadeElements.forEach((el) => {
         gsap.fromTo(el, 
-            { y: 50, opacity: 0 }, // Aumentado deslocamento Y inicial
+            { y: 50, opacity: 0 }, 
             {
                 y: 0, opacity: 1, duration: 1.2, ease: "power4.out",
                 scrollTrigger: { 
@@ -128,12 +143,12 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     });
 
-    // Stagger (Efeito Cascata em blocos) com mais deslocamento
+    // Stagger (Efeito Cascata)
     const staggerGroups = document.querySelectorAll(".stagger-group");
     staggerGroups.forEach((group) => {
         const items = group.querySelectorAll(".stagger-item");
         gsap.fromTo(items, 
-            { y: 40, opacity: 0 }, // Aumentado deslocamento Y inicial
+            { y: 40, opacity: 0 }, 
             {
                 y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power3.out",
                 scrollTrigger: { 
