@@ -129,20 +129,14 @@ a {
 }
 
 /* FIX DEFINITIVO DO LOGO VERMELHO #a1231f */
-/* Usamos a técnica de máscara CSS: Pintamos a div de vermelho sólido e usamos o SVG como máscara */
 .logo {
     width: 80px;
-    height: 30px; /* Altura aproximada do logo para a máscara funcionar */
+    height: auto; 
     display: block;
-    background-color: var(--accent);
-    -webkit-mask-image: url("/assets/logo-ela.svg");
-    mask-image: url("/assets/logo-ela.svg");
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    /* Removemos o filtro anterior */
-    filter: none;
+    padding-bottom: 6px;
+    box-sizing: content-box;
+    /* Filtro recalculado para o tom escuro do #a1231f, sem usar a máscara que cortava os contornos do SVG */
+    filter: invert(19%) sepia(85%) saturate(3065%) hue-rotate(345deg) brightness(87%) contrast(92%);
 }
 
 .nav-menu {
@@ -310,11 +304,11 @@ a {
 
 /* --- DOBRA 4 (METODOLOGIA - FIX DA SOBREPOSIÇÃO) --- */
 #metodologia {
-    /* Garante que esta dobra tenha peso próprio e empurre o footer */
+    /* Força o comportamento nativo para empurrar o footer e não sobrepor */
     background: var(--bg-white); 
-    display: block; /* Garante comportamento normal de bloco */
-    min-height: auto; /* Permite crescer conforme o texto */
-    overflow: hidden; /* Evita vazamentos */
+    display: block;
+    height: auto;
+    overflow: visible;
 }
 
 .container-metodologia {
@@ -333,7 +327,6 @@ a {
     gap: 24px;
     position: relative;
     z-index: 5;
-    /* Margem interna para garantir que o texto não cola nos limites */
     padding: 20px 0; 
 }
 
@@ -427,7 +420,7 @@ a {
 }
 
 /* GSAP START STATE */
-.gsap-fade, .stagger-item, .header-container .logo-link, .nav-link {
+.gsap-fade, .stagger-item, .header-container .logo, .nav-link {
     opacity: 0;
     visibility: hidden;
 }
@@ -466,12 +459,11 @@ a {
     
     .container-metodologia { justify-content: flex-start; }
     .metodologia-content { align-items: flex-start; text-align: left; max-width: 100%; }
-    .metodologia-content h2 { text-align: left; }
+    .metodologia-content h2 { text-align: left; margin-bottom: 20px; }
 }
 
 /* CAMADAS */
 #sobre-nos { position: relative; z-index: 2; }
 #arquitetura { position: relative; z-index: 1; }
-/* Removi a transição de GSAP agressiva do #metodologia para estabilizar a dobra */
 #metodologia { position: relative; z-index: 3; }
 #cafe { position: relative; z-index: 4; }
