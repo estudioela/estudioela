@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 3. Lógica do Acordeon 
+    // 3. Lógica do Acordeon (Limpa e Funcional)
     const accordions = document.querySelectorAll('.accordion-item');
     accordions.forEach(acc => {
         const header = acc.querySelector('.accordion-header');
@@ -23,12 +23,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const isOpen = acc.classList.contains('active');
             const content = acc.querySelector('.accordion-content');
             
+            // Fecha os outros
             accordions.forEach(a => {
                 a.classList.remove('active');
                 a.querySelector('.accordion-content').style.maxHeight = null;
                 a.querySelector('.accordion-icon').textContent = '+';
             });
             
+            // Abre o clicado
             if (!isOpen && content.innerHTML.trim() !== "") {
                 acc.classList.add('active');
                 content.style.maxHeight = content.scrollHeight + "px";
@@ -37,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    // Abre o primeiro item do acordeon por padrão
     const firstAcc = document.querySelector('.accordion-item');
     if(firstAcc) {
         firstAcc.classList.add('active');
@@ -45,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
         firstAcc.querySelector('.accordion-icon').textContent = '-';
     }
 
+    // Recalcula altura no resize
     window.addEventListener('resize', () => {
         const activeAcc = document.querySelector('.accordion-item.active .accordion-content');
         if(activeAcc) {
@@ -52,11 +56,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 4. Animações GSAP
+    // 4. Animações GSAP (Estilo Editorial / Vogue)
     gsap.registerPlugin(ScrollTrigger);
 
-    // Fade in do cabeçalho
-    gsap.to(".header-container .logo, .nav-link", {
+    // Fade in do cabeçalho (atingindo a tag do link para animar tudo junto sem bugs)
+    gsap.to(".header-container .logo-link, .nav-link", {
         opacity: 1,
         visibility: "visible",
         y: 0,
@@ -80,7 +84,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Revelação dos Textos
+    // Transição (Efeito Cortina) sutil e sem sobreposições
+    gsap.to("#arquitetura", {
+        yPercent: 5, 
+        ease: "none",
+        scrollTrigger: {
+            trigger: "#metodologia",
+            start: "top bottom", 
+            end: "top top",      
+            scrub: true
+        }
+    });
+
+    // Revelação dos Textos (Fade Up Elegante)
     const fadeElements = document.querySelectorAll(".gsap-fade");
     fadeElements.forEach((el) => {
         gsap.fromTo(el, 
@@ -96,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     });
 
-    // Revelação em Cascata (Stagger)
+    // Revelação em Cascata para os parágrafos (Stagger Lento)
     const staggerGroups = document.querySelectorAll(".stagger-group");
     staggerGroups.forEach((group) => {
         const items = group.querySelectorAll(".stagger-item");
