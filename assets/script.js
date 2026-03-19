@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 3. Lógica do Acordeon (Arquitetura de Serviços)
+    // 3. Lógica do Acordeon (Limpa e Funcional)
     const accordions = document.querySelectorAll('.accordion-item');
     accordions.forEach(acc => {
         const header = acc.querySelector('.accordion-header');
@@ -56,42 +56,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 4. Efeito Botão Magnético Premium
-    const magnetics = document.querySelectorAll('.magnetic-wrap');
-    magnetics.forEach(wrap => {
-        const btn = wrap.querySelector('.magnetic-btn');
-        
-        wrap.addEventListener('mousemove', (e) => {
-            const rect = wrap.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
-            gsap.to(btn, { x: x * 0.4, y: y * 0.4, duration: 0.3, ease: "power2.out" });
-        });
-        
-        wrap.addEventListener('mouseleave', () => {
-            gsap.to(btn, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.3)" });
-        });
-    });
-
-    // 5. Animações GSAP Refinadas (Mais Movimento)
+    // 4. Animações GSAP (Lentas, Elegantes e Sutis)
     gsap.registerPlugin(ScrollTrigger);
 
-    // Fade in do cabeçalho mais lento
+    // Fade in do cabeçalho
     gsap.to(".header-container .logo, .nav-link", {
         opacity: 1,
         visibility: "visible",
         y: 0,
         duration: 1.5,
         stagger: 0.1,
-        ease: "power3.out",
-        delay: 0.2
+        ease: "power2.out",
+        delay: 0.3
     });
 
     gsap.set(".gsap-fade, .stagger-item", { visibility: "visible" });
 
-    // Parallax no Vídeo Hero
+    // Parallax Sutil no Vídeo Hero
     gsap.to(".hero-bg", {
-        yPercent: 20,
+        yPercent: 15,
         ease: "none",
         scrollTrigger: {
             trigger: ".hero",
@@ -101,9 +84,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Transição (Efeito Cortina)
+    // Transição Cortina Suave
     gsap.to("#arquitetura", {
-        yPercent: 15, 
+        yPercent: 10, 
         ease: "none",
         scrollTrigger: {
             trigger: "#metodologia",
@@ -113,49 +96,33 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Animação da ilustração no Footer
-    gsap.fromTo(".footer-bleed",
-        { scale: 0.9, y: 80 },
-        {
-            scale: 1,
-            y: 0,
-            ease: "none",
-            scrollTrigger: {
-                trigger: ".footer-bleed-wrapper",
-                start: "top bottom", 
-                end: "bottom bottom",
-                scrub: true
-            }
-        }
-    );
-
-    // Revelação dos Textos mais fluida (Fade Up)
+    // Revelação dos Textos (Fade Up Elegante)
     const fadeElements = document.querySelectorAll(".gsap-fade");
     fadeElements.forEach((el) => {
         gsap.fromTo(el, 
-            { y: 60, opacity: 0 }, 
+            { y: 30, opacity: 0 }, 
             {
-                y: 0, opacity: 1, duration: 1.5, ease: "power3.out",
+                y: 0, opacity: 1, duration: 1.4, ease: "power2.out",
                 scrollTrigger: { 
                     trigger: el, 
-                    start: "top 90%", 
+                    start: "top 85%", 
                     toggleActions: "play none none reverse" 
                 }
             }
         );
     });
 
-    // Revelação em Cascata (Stagger) para os parágrafos
+    // Revelação em Cascata para os parágrafos (Stagger Lento)
     const staggerGroups = document.querySelectorAll(".stagger-group");
     staggerGroups.forEach((group) => {
         const items = group.querySelectorAll(".stagger-item");
         gsap.fromTo(items, 
-            { y: 50, opacity: 0 }, 
+            { y: 20, opacity: 0 }, 
             {
-                y: 0, opacity: 1, duration: 1.2, stagger: 0.2, ease: "power3.out",
+                y: 0, opacity: 1, duration: 1.2, stagger: 0.2, ease: "power2.out",
                 scrollTrigger: { 
                     trigger: group, 
-                    start: "top 85%", 
+                    start: "top 80%", 
                     toggleActions: "play none none reverse" 
                 }
             }
