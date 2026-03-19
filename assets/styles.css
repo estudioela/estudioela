@@ -1,5 +1,5 @@
 :root {
-    --accent: #a1231f; /* Novo vermelho sólido e luxuoso */
+    --accent: #a1231f; /* Vermelho Estúdio Elã */
     --text-dark: #3a3838;
     --text-black: #000000;
     --bg-white: #ffffff;
@@ -24,7 +24,7 @@ body {
     overflow-x: hidden;
 }
 
-/* --- TIPOGRAFIA MISTA E REFINADA --- */
+/* CLASSES DE TIPOGRAFIA MISTA */
 .ivy-italic {
     font-family: "ivypresto-display", serif;
     font-weight: 300;
@@ -128,14 +128,21 @@ a {
     display: block;
 }
 
-/* Filtro SVG CSS preciso para atingir o vermelho #a1231f */
+/* FIX DEFINITIVO DO LOGO VERMELHO #a1231f */
+/* Usamos a técnica de máscara CSS: Pintamos a div de vermelho sólido e usamos o SVG como máscara */
 .logo {
     width: 80px;
-    height: auto; 
+    height: 30px; /* Altura aproximada do logo para a máscara funcionar */
     display: block;
-    padding-bottom: 6px;
-    box-sizing: content-box;
-    filter: invert(19%) sepia(85%) saturate(3065%) hue-rotate(345deg) brightness(87%) contrast(92%);
+    background-color: var(--accent);
+    -webkit-mask-image: url("/assets/logo-ela.svg");
+    mask-image: url("/assets/logo-ela.svg");
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    /* Removemos o filtro anterior */
+    filter: none;
 }
 
 .nav-menu {
@@ -195,7 +202,7 @@ a {
 .norte-grid {
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Centralizado verticalmente */
+    align-items: center; 
     gap: 80px; 
 }
 
@@ -205,7 +212,7 @@ a {
 }
 
 .norte-col-left h2 {
-    font-size: 48px; /* Reduzido e delicado */
+    font-size: 48px; 
     line-height: 1.1;
 }
 
@@ -219,7 +226,7 @@ a {
 
 .norte-col-right p {
     color: var(--text-dark);
-    font-size: 18px; /* Texto menor e leve */
+    font-size: 18px; 
     line-height: 1.6; 
 }
 
@@ -269,7 +276,6 @@ a {
     transition: font-weight 0.3s ease;
 }
 
-/* Hover Sutil: Só ganha peso e underline */
 .accordion-item:hover .accordion-title {
     font-weight: 700;
     text-decoration: underline;
@@ -302,7 +308,15 @@ a {
     font-weight: 300;
 }
 
-/* --- DOBRA 4 (METODOLOGIA - ALINHADA À DIREITA) --- */
+/* --- DOBRA 4 (METODOLOGIA - FIX DA SOBREPOSIÇÃO) --- */
+#metodologia {
+    /* Garante que esta dobra tenha peso próprio e empurre o footer */
+    background: var(--bg-white); 
+    display: block; /* Garante comportamento normal de bloco */
+    min-height: auto; /* Permite crescer conforme o texto */
+    overflow: hidden; /* Evita vazamentos */
+}
+
 .container-metodologia {
     display: flex;
     justify-content: flex-end; 
@@ -317,6 +331,10 @@ a {
     flex-direction: column;
     align-items: flex-end; 
     gap: 24px;
+    position: relative;
+    z-index: 5;
+    /* Margem interna para garantir que o texto não cola nos limites */
+    padding: 20px 0; 
 }
 
 .metodologia-content h2 {
@@ -333,9 +351,9 @@ a {
     line-height: 1.6;
 }
 
-/* --- FOOTER (ALINHADO À ESQUERDA + RESPIRO EXTRA) --- */
+/* --- FOOTER (ALINHADO 100% À ESQUERDA) --- */
 #cafe {
-    padding-bottom: 120px; /* Respiro final limpo, sem imagens */
+    padding-bottom: 120px; 
 }
 
 .container-footer {
@@ -364,7 +382,7 @@ a {
     margin: 0;
 }
 
-/* --- CTA: BOTÃO DE LUXO (SEM MAGNETIC) --- */
+/* CTA: BOTÃO DE LUXO */
 .cta-wrapper {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -385,7 +403,7 @@ a {
     transition: background 0.4s ease, color 0.4s ease;
 }
 
-.btn-agendar:hover {
+.btn-agendar.chic-hover:hover {
     background: transparent;
     color: var(--bg-white);
 }
@@ -409,12 +427,12 @@ a {
 }
 
 /* GSAP START STATE */
-.gsap-fade, .stagger-item, .header-container .logo, .nav-link {
+.gsap-fade, .stagger-item, .header-container .logo-link, .nav-link {
     opacity: 0;
     visibility: hidden;
 }
 
-/* --- RESPONSIVO (MOBILE FIRST) --- */
+/* --- RESPONSIVO --- */
 @media(max-width: 1100px) {
     .container { padding: 0 40px; }
     .norte-grid { flex-direction: column; gap: 40px; align-items: flex-start; }
@@ -423,7 +441,7 @@ a {
 
 @media(max-width: 768px) {
     .section-light, .section-red { padding: 80px 0; } 
-    #cafe { padding-bottom: 80px; } /* Respiro proporcional no celular */
+    #cafe { padding-bottom: 80px; }
     
     .norte-col-left h2, .titulo-arquitetura, .metodologia-content h2, .container-footer h2 {
         font-size: 36px;
@@ -446,14 +464,14 @@ a {
         display: none;
     }
     
-    /* Quebra para a esquerda no mobile para leitura confortável */
     .container-metodologia { justify-content: flex-start; }
     .metodologia-content { align-items: flex-start; text-align: left; max-width: 100%; }
     .metodologia-content h2 { text-align: left; }
 }
 
-/* CAMADAS PARA O EFEITO DE CORTINA SUAVE */
+/* CAMADAS */
 #sobre-nos { position: relative; z-index: 2; }
 #arquitetura { position: relative; z-index: 1; }
+/* Removi a transição de GSAP agressiva do #metodologia para estabilizar a dobra */
 #metodologia { position: relative; z-index: 3; }
 #cafe { position: relative; z-index: 4; }
