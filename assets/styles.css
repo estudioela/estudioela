@@ -1,5 +1,5 @@
 :root {
-    --accent: #a1231f; /* Vermelho Estúdio Elã */
+    --accent: #a1231f; /* Vermelho Estúdio Elã Puro */
     --text-dark: #3a3838;
     --text-black: #000000;
     --bg-white: #ffffff;
@@ -128,15 +128,13 @@ a {
     display: block;
 }
 
-/* FIX DEFINITIVO DO LOGO VERMELHO #a1231f */
+/* LOGO TOTALMENTE LIMPO! Agora a cor vai ser definida diretamente no SVG original */
 .logo {
     width: 80px;
     height: auto; 
     display: block;
     padding-bottom: 6px;
     box-sizing: content-box;
-    /* Filtro recalculado para o tom escuro do #a1231f, sem usar a máscara que cortava os contornos do SVG */
-    filter: invert(19%) sepia(85%) saturate(3065%) hue-rotate(345deg) brightness(87%) contrast(92%);
 }
 
 .nav-menu {
@@ -224,7 +222,7 @@ a {
     line-height: 1.6; 
 }
 
-/* --- SEÇÕES VERMELHAS (#a1231f CHAPADO E PURO) --- */
+/* --- SEÇÕES VERMELHAS --- */
 .section-red {
     background-color: var(--accent);
     color: var(--bg-white);
@@ -267,7 +265,7 @@ a {
     font-size: 26px; 
     margin: 0;
     line-height: 1.1;
-    transition: font-weight 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .accordion-item:hover .accordion-title {
@@ -304,7 +302,6 @@ a {
 
 /* --- DOBRA 4 (METODOLOGIA - FIX DA SOBREPOSIÇÃO) --- */
 #metodologia {
-    /* Força o comportamento nativo para empurrar o footer e não sobrepor */
     background: var(--bg-white); 
     display: block;
     height: auto;
@@ -375,7 +372,7 @@ a {
     margin: 0;
 }
 
-/* CTA: BOTÃO DE LUXO */
+/* CTA: BOTÃO DE LUXO VOGUE */
 .cta-wrapper {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -420,7 +417,7 @@ a {
 }
 
 /* GSAP START STATE */
-.gsap-fade, .stagger-item, .header-container .logo, .nav-link {
+.gsap-fade, .stagger-item, .header-container .logo-link, .nav-link {
     opacity: 0;
     visibility: hidden;
 }
@@ -459,7 +456,7 @@ a {
     
     .container-metodologia { justify-content: flex-start; }
     .metodologia-content { align-items: flex-start; text-align: left; max-width: 100%; }
-    .metodologia-content h2 { text-align: left; margin-bottom: 20px; }
+    .metodologia-content h2 { text-align: left; }
 }
 
 /* CAMADAS */
