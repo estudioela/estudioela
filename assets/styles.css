@@ -1,5 +1,5 @@
 :root {
-    --accent: #cd0005;
+    --accent: #a1231f; /* Novo vermelho sólido e luxuoso */
     --text-dark: #3a3838;
     --text-black: #000000;
     --bg-white: #ffffff;
@@ -24,7 +24,7 @@ body {
     overflow-x: hidden;
 }
 
-/* CLASSES DE TIPOGRAFIA MISTA */
+/* --- TIPOGRAFIA MISTA E REFINADA --- */
 .ivy-italic {
     font-family: "ivypresto-display", serif;
     font-weight: 300;
@@ -73,6 +73,11 @@ body {
 .title-editorial {
     font-family: "ivypresto-display", serif;
     font-weight: 300;
+    color: var(--accent);
+}
+
+.section-red .title-editorial {
+    color: var(--bg-white);
 }
 
 .title-editorial .vowel {
@@ -123,13 +128,14 @@ a {
     display: block;
 }
 
+/* Filtro SVG CSS preciso para atingir o vermelho #a1231f */
 .logo {
     width: 80px;
     height: auto; 
     display: block;
     padding-bottom: 6px;
     box-sizing: content-box;
-    filter: brightness(0) saturate(100%) invert(13%) sepia(93%) saturate(6001%) hue-rotate(348deg) brightness(88%) contrast(114%);
+    filter: invert(19%) sepia(85%) saturate(3065%) hue-rotate(345deg) brightness(87%) contrast(92%);
 }
 
 .nav-menu {
@@ -162,7 +168,7 @@ a {
     left: 0;
     background-color: var(--accent);
     transform-origin: bottom right;
-    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .nav-link:hover::after {
@@ -179,9 +185,9 @@ a {
     cursor: pointer;
 }
 
-/* --- ESPAÇAMENTO EDITORIAL (DOBRAS COM MAIS RESPIRO) --- */
+/* --- ESPAÇAMENTO EDITORIAL RESPIRO --- */
 .section-light, .section-red {
-    padding: 120px 0; 
+    padding: 140px 0; 
     position: relative;
 }
 
@@ -189,8 +195,8 @@ a {
 .norte-grid {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* Alinhamento ao topo para melhor leitura */
-    gap: 100px; /* Mais respiro entre as colunas */
+    align-items: center; /* Centralizado verticalmente */
+    gap: 80px; 
 }
 
 .norte-col-left {
@@ -199,8 +205,7 @@ a {
 }
 
 .norte-col-left h2 {
-    color: var(--accent);
-    font-size: 48px; /* 30% menor que os 70px originais */
+    font-size: 48px; /* Reduzido e delicado */
     line-height: 1.1;
 }
 
@@ -214,32 +219,24 @@ a {
 
 .norte-col-right p {
     color: var(--text-dark);
-    font-size: 18px; /* 30% menor e mais delicado */
-    line-height: 1.6; /* Mais respiro entre as linhas */
+    font-size: 18px; /* Texto menor e leve */
+    line-height: 1.6; 
 }
 
-/* --- SEÇÕES VERMELHAS (FUNDO ANIMADO) --- */
+/* --- SEÇÕES VERMELHAS (#a1231f CHAPADO E PURO) --- */
 .section-red {
-    background: linear-gradient(135deg, var(--accent), #9b0004, var(--accent));
-    background-size: 200% 200%;
-    animation: flowBackground 15s ease infinite;
+    background-color: var(--accent);
     color: var(--bg-white);
     overflow: hidden; 
 }
 
-@keyframes flowBackground {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
 .titulo-arquitetura {
-    font-size: 48px; /* 30% menor */
+    font-size: 48px; 
     line-height: 1.1;
     margin-bottom: 60px;
 }
 
-/* ACORDEON STYLES */
+/* --- ACORDEON STYLES --- */
 .accordion-wrapper {
     display: flex;
     flex-direction: column;
@@ -248,9 +245,8 @@ a {
 
 .accordion-item {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 24px 0;
+    padding: 30px 0;
     cursor: pointer;
-    transition: padding 0.3s ease;
 }
 
 .accordion-item:last-child {
@@ -262,27 +258,29 @@ a {
     justify-content: space-between;
     align-items: center;
     color: var(--bg-white);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.accordion-item:hover .accordion-header {
-    opacity: 0.8;
-    transform: translateX(5px);
 }
 
 .accordion-title {
     font-family: "ivypresto-display", serif;
     font-weight: 300;
-    font-size: 26px; /* Menor e mais delicado */
+    font-size: 26px; 
     margin: 0;
     line-height: 1.1;
+    transition: font-weight 0.3s ease;
+}
+
+/* Hover Sutil: Só ganha peso e underline */
+.accordion-item:hover .accordion-title {
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
 }
 
 .accordion-icon {
     font-size: 32px;
     font-weight: 300;
     line-height: 1;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
 }
 
 .accordion-item.active .accordion-icon {
@@ -296,11 +294,11 @@ a {
 }
 
 .accordion-content p {
-    font-size: 16px; /* Mais delicado */
+    font-size: 16px; 
     line-height: 1.6;
     color: var(--bg-white);
     margin: 0;
-    padding-top: 15px;
+    padding-top: 20px;
     font-weight: 300;
 }
 
@@ -308,66 +306,68 @@ a {
 .container-metodologia {
     display: flex;
     justify-content: flex-end; 
+    width: 100%;
 }
 
 .metodologia-content {
     width: 100%;
-    max-width: 650px; /* Reduzido para dar mais respiro à esquerda */
+    max-width: 650px; 
     text-align: right; 
     display: flex;
     flex-direction: column;
     align-items: flex-end; 
     gap: 24px;
-    position: relative;
-    z-index: 5;
 }
 
 .metodologia-content h2 {
-    font-size: 48px; /* 30% menor */
+    color: var(--accent);
+    font-size: 48px; 
     line-height: 1.1;
     text-align: right;
     margin-bottom: 10px;
 }
 
 .metodologia-content p {
-    font-size: 18px; /* 30% menor */
+    color: var(--accent);
+    font-size: 18px; 
     line-height: 1.6;
 }
 
-/* --- FOOTER (RESTAURADO AO CENTRO COMO NO ORIGINAL) --- */
+/* --- FOOTER (ALINHADO À ESQUERDA + RESPIRO EXTRA) --- */
+#cafe {
+    padding-bottom: 120px; /* Respiro final limpo, sem imagens */
+}
+
 .container-footer {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Voltou pro centro */
-    justify-content: center; 
+    align-items: flex-start;
+    justify-content: flex-start; 
     gap: 30px;
-    position: relative;
-    z-index: 5; 
-    text-align: center; /* Voltou pro centro */
+    text-align: left;
 }
 
 .container-footer h2 {
-    font-size: 48px; /* 30% menor */
+    font-size: 48px; 
     line-height: 1.1;
-    text-align: center;
+    text-align: left;
+    margin: 0;
     max-width: 800px;
-    margin: 0 auto;
 }
 
 .cafe-texto {
     width: 100%;
-    max-width: 600px; /* Mais contido para ler melhor */
-    text-align: center; 
+    max-width: 650px; 
+    text-align: left; 
     font-size: 18px;
     line-height: 1.6;
-    margin: 0 auto;
+    margin: 0;
 }
 
-/* CONTAINER MAGNÉTICO DO BOTÃO */
-.magnetic-wrap {
-    display: inline-block;
-    padding: 30px; 
-    margin: 0;
+/* --- CTA: BOTÃO DE LUXO (SEM MAGNETIC) --- */
+.cta-wrapper {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .btn-agendar {
@@ -378,63 +378,52 @@ a {
     height: 48px;
     background: var(--bg-white);
     color: var(--accent);
+    border: 1px solid var(--bg-white);
     border-radius: 24px;
     font-size: 15px;
     font-weight: 700;
-    transition: box-shadow 0.4s ease;
-    will-change: transform;
+    transition: background 0.4s ease, color 0.4s ease;
 }
 
 .btn-agendar:hover {
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    background: transparent;
+    color: var(--bg-white);
 }
 
 .footer-links {
-    font-size: 16px; /* Mais delicado */
-    text-align: center;
+    font-size: 16px; 
+    text-align: left;
     width: 100%;
+    margin-top: 20px;
 }
 
 .footer-links a {
-    transition: opacity 0.2s ease;
+    transition: opacity 0.3s ease;
     font-weight: 400;
 }
 
 .footer-links a:hover {
     opacity: 0.6;
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
-.footer-bleed-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 40px; 
-    pointer-events: none;
-}
-
-.footer-bleed {
-    width: 120%; 
-    min-width: 1200px;
-    transform: translateY(15%); 
-    display: block;
-}
-
-/* Esconde inicialmente os itens que vão ser animados pelo GSAP */
+/* GSAP START STATE */
 .gsap-fade, .stagger-item, .header-container .logo, .nav-link {
     opacity: 0;
     visibility: hidden;
 }
 
-/* --- RESPONSIVO (MOBILE FIRST NA PRIORIDADE VISUAL) --- */
+/* --- RESPONSIVO (MOBILE FIRST) --- */
 @media(max-width: 1100px) {
     .container { padding: 0 40px; }
-    .norte-grid { flex-direction: column; gap: 40px; }
+    .norte-grid { flex-direction: column; gap: 40px; align-items: flex-start; }
     .norte-col-left, .norte-col-right { width: 100%; text-align: left; }
-    .footer-bleed { width: 150%; transform: translateY(10%); }
 }
 
 @media(max-width: 768px) {
     .section-light, .section-red { padding: 80px 0; } 
+    #cafe { padding-bottom: 80px; } /* Respiro proporcional no celular */
     
     .norte-col-left h2, .titulo-arquitetura, .metodologia-content h2, .container-footer h2 {
         font-size: 36px;
@@ -456,17 +445,14 @@ a {
     .scroll-indicator {
         display: none;
     }
-
-    .footer-bleed {
-        min-width: 0; 
-        width: 220%;
-    }
     
+    /* Quebra para a esquerda no mobile para leitura confortável */
     .container-metodologia { justify-content: flex-start; }
     .metodologia-content { align-items: flex-start; text-align: left; max-width: 100%; }
-    .metodologia-content h2 { text-align: left; margin-bottom: 20px; }
+    .metodologia-content h2 { text-align: left; }
 }
 
+/* CAMADAS PARA O EFEITO DE CORTINA SUAVE */
 #sobre-nos { position: relative; z-index: 2; }
 #arquitetura { position: relative; z-index: 1; }
 #metodologia { position: relative; z-index: 3; }
