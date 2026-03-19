@@ -55,8 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // 4. Animações GSAP
     gsap.registerPlugin(ScrollTrigger);
 
-    // Fade in do cabeçalho (Atingindo a div do logo-link para o mask-image animar junto)
-    gsap.to(".header-container .logo-link, .nav-link", {
+    // Fade in do cabeçalho
+    gsap.to(".header-container .logo, .nav-link", {
         opacity: 1,
         visibility: "visible",
         y: 0,
@@ -76,18 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
             trigger: ".hero",
             start: "top top",
             end: "bottom top",
-            scrub: true
-        }
-    });
-
-    // FIX DA DOBRA DE METODOLOGIA: Efeito cortina muito leve, sem comprometer as margens 
-    gsap.to("#arquitetura", {
-        yPercent: 5, // Reduzido drasticamente para não engolir o padding da seção branca
-        ease: "none",
-        scrollTrigger: {
-            trigger: "#metodologia",
-            start: "top bottom", 
-            end: "top top",      
             scrub: true
         }
     });
