@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 4. Animações GSAP (Estilo Editorial / Vogue)
     gsap.registerPlugin(ScrollTrigger);
 
-    // Fade in do cabeçalho (atingindo a tag do link para animar tudo junto sem bugs)
+    // Fade in do cabeçalho
     gsap.to(".header-container .logo-link, .nav-link", {
         opacity: 1,
         visibility: "visible",
@@ -128,4 +128,22 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         );
     });
+
+    // --- NOVA ANIMAÇÃO: EFEITO CASCATA EDITORIAL NOS LINKS DO FOOTER ---
+    gsap.set(".footer-link-item", { visibility: "visible" });
+
+    gsap.fromTo(".footer-link-item", 
+        { opacity: 0, x: -15 }, 
+        {
+            opacity: 1, x: 0,
+            duration: 1.5,
+            stagger: 0.15, // Velocidade com que cada palavra se revela (efeito dominó)
+            ease: "power2.out",
+            scrollTrigger: { 
+                trigger: ".footer-links", 
+                start: "top 90%", 
+                toggleActions: "play none none reverse" 
+            }
+        }
+    );
 });
