@@ -47,7 +47,7 @@ textarea{resize:vertical; min-height:80px;}
 <h1>[briefing] fotografia e imagem</h1>
 
 <div class="intro">
-    <p>este formulário ajuda a alinhar a expectativa visual para a nossa sessão de fotos.</p>
+    <p>este formulário ajuda a alinhar a expectativa visual para a nossa sessão de fotos clínica.</p>
 </div>
 
 <div class="divider"></div>
@@ -55,22 +55,22 @@ textarea{resize:vertical; min-height:80px;}
 <form id="photography-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfwwtKrS51_BpRA78zXoUZ9HbM4J7tvFMIzHX6xiFkaK_36FA/formResponse" method="post" target="hidden_iframe">
 
     <div class="field">
-        <label>nome profissional *</label>
-        <input type="text" id="nome_profissional" name="entry.2007996240" required>
-    </div>
-
-    <div class="field">
         <label>quais procedimentos você quer que mais apareçam no seu perfil nos próximos meses? *</label>
-        <textarea name="entry.1508188505" required></textarea>
+        <textarea name="entry.2007996240" required></textarea>
     </div>
 
     <div class="field">
         <label>existe algum serviço que você quer começar a vender mais nos próximos 6 meses? se sim, qual? *</label>
-        <textarea name="entry.1759413858" required></textarea>
+        <textarea name="entry.1508188505" required></textarea>
     </div>
 
     <div class="field">
         <label>quais procedimentos você considera inegociáveis de registrar nessa sessão? *</label>
+        <textarea name="entry.1759413858" required></textarea>
+    </div>
+
+    <div class="field">
+        <label>existe algum procedimento ou situação clínica que você prefere não expor no perfil? *</label>
         <textarea name="entry.987054281" required></textarea>
     </div>
 
@@ -78,35 +78,35 @@ textarea{resize:vertical; min-height:80px;}
         <label>você prefere imagens com qual abordagem? *</label>
         <select name="entry.1546124726" required>
             <option value="" disabled selected>selecione...</option>
-            <option value="Técnica, foco no procedimento e no resultado">técnica, foco no procedimento e no resultado</option>
-            <option value="Humanizada, foco na relação com o paciente">humanizada, foco na relação com o paciente</option>
-            <option value="Equilíbrio dos dois">equilíbrio dos dois</option>
+            <option value="Técnica, foco no procedimento e no resultado">Técnica, foco no procedimento e no resultado</option>
+            <option value="Humanizada, foco na relação com o paciente">Humanizada, foco na relação com o paciente</option>
+            <option value="Equilíbrio dos dois">Equilíbrio dos dois</option>
         </select>
     </div>
 
     <div class="field">
-        <label>como você quer ser percebida nas imagens? *</label>
+        <label>como você quer ser percebida nas imagens? (exemplos para orientar: sofisticada, acolhedora, técnica, moderna...) *</label>
         <textarea name="entry.996706771" required></textarea>
     </div>
 
     <div class="field">
-        <label>o que você definitivamente não gosta em fotos de dentistas? *</label>
+        <label>o que você definitivamente não gosta em fotos de dentistas? algum estilo, ângulo ou situação que você quer evitar? *</label>
         <textarea name="entry.1892389654" required></textarea>
     </div>
 
     <div class="field">
-        <label>tem alguma referência visual que você admira? *</label>
+        <label>tem alguma referência visual que você admira, seja de outros profissionais, marcas ou qualquer outra área? *</label>
         <textarea name="entry.1924045166" required></textarea>
     </div>
 
     <div class="field">
-        <label>frequência de postagens desejada *</label>
-        <input type="text" name="entry.1515815936" required>
+        <label>tem algum protocolo de epi ou item do consultório que precisa aparecer obrigatoriamente nas imagens? *</label>
+        <textarea name="entry.1515815936" required></textarea>
     </div>
 
     <div class="field">
         <label>o que uma pessoa que nunca te conheceu deve sentir ao ver seu perfil pela primeira vez? *</label>
-        <input type="text" name="entry.621187782" required>
+        <textarea name="entry.621187782" required></textarea>
     </div>
 
     <button type="submit" class="submit-btn">enviar briefing :)</button>
@@ -126,14 +126,10 @@ document.getElementById("photography-form").addEventListener("submit", function(
 
 document.getElementById("hidden_iframe").addEventListener("load", function() {
   if(formSubmitted){
-    const nomeBruto = document.getElementById("nome_profissional").value.trim();
-    const primeiroNome = nomeBruto.split(' ')[0];
-    const nomeFormatado = primeiroNome.charAt(0).toUpperCase() + primeiroNome.slice(1).toLowerCase();
-
     document.getElementById("form-container").innerHTML =
       `<div class='success-state'>
-        <h2>obrigado, ${nomeFormatado}!</h2>
-        <p>seu briefing de fotografia já está com o time da elã.</p>
+        <h2>obrigado!</h2>
+        <p>o seu briefing de fotografia foi enviado com sucesso para a elã.</p>
       </div>`;
     window.scrollTo(0,0);
   }
