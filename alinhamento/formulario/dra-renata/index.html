@@ -21,7 +21,6 @@ body{margin:0; background:var(--bg); color:var(--text); font-family:"acumin-pro"
 .logo-wrap{text-align:center; margin-bottom:8px;}
 .logo-img{height:112px; filter:brightness(0) saturate(100%) invert(12%) sepia(99%) saturate(6226%) hue-rotate(351deg) brightness(96%) contrast(106%);}
 h1{margin:0 0 18px; text-align:center; font-size:20px; font-weight:600;}
-.intro{font-size:13px; color:var(--muted); margin-bottom:22px; text-align:center;}
 .divider{height:1px; background:#ececec; margin:26px 0; position:relative;}
 .divider::before{content:""; position:absolute; left:0; top:0; width:22px; height:1px; background:var(--accent);}
 .field{display:flex; flex-direction:column; gap:6px; margin-bottom:20px;}
@@ -44,40 +43,36 @@ textarea{resize:vertical; min-height:80px;}
     <img src="/assets/logo-ela.svg" class="logo-img" alt="elã">
 </div>
 
-<h1>[briefing] fotografia e imagem</h1>
-
-<div class="intro">
-    <p>este formulário ajuda a alinhar a expectativa visual para a nossa sessão de fotos clínica.</p>
-</div>
+<h1>Formulário sem título</h1>
 
 <div class="divider"></div>
 
 <form id="photography-form" action="https://docs.google.com/forms/d/e/1FAIpQLSfwwtKrS51_BpRA78zXoUZ9HbM4J7tvFMIzHX6xiFkaK_36FA/formResponse" method="post" target="hidden_iframe">
 
     <div class="field">
-        <label>quais procedimentos você quer que mais apareçam no seu perfil nos próximos meses? *</label>
+        <label>Quais procedimentos você quer que mais apareçam no seu perfil nos próximos meses? *</label>
         <textarea name="entry.2007996240" required></textarea>
     </div>
 
     <div class="field">
-        <label>existe algum serviço que você quer começar a vender mais nos próximos 6 meses? se sim, qual? *</label>
+        <label>Existe algum serviço que você quer começar a vender mais nos próximos 6 meses? Se sim, qual? *</label>
         <textarea name="entry.1508188505" required></textarea>
     </div>
 
     <div class="field">
-        <label>quais procedimentos você considera inegociáveis de registrar nessa sessão? *</label>
+        <label>Quais procedimentos você considera inegociáveis de registrar nessa sessão? *</label>
         <textarea name="entry.1759413858" required></textarea>
     </div>
 
     <div class="field">
-        <label>existe algum procedimento ou situação clínica que você prefere não expor no perfil? *</label>
+        <label>Existe algum procedimento ou situação clínica que você prefere não expor no perfil? *</label>
         <textarea name="entry.987054281" required></textarea>
     </div>
 
     <div class="field">
-        <label>você prefere imagens com qual abordagem? *</label>
+        <label>Você prefere imagens com qual abordagem? *</label>
         <select name="entry.1546124726" required>
-            <option value="" disabled selected>selecione...</option>
+            <option value="" disabled selected>Escolher</option>
             <option value="Técnica, foco no procedimento e no resultado">Técnica, foco no procedimento e no resultado</option>
             <option value="Humanizada, foco na relação com o paciente">Humanizada, foco na relação com o paciente</option>
             <option value="Equilíbrio dos dois">Equilíbrio dos dois</option>
@@ -85,31 +80,31 @@ textarea{resize:vertical; min-height:80px;}
     </div>
 
     <div class="field">
-        <label>como você quer ser percebida nas imagens? (exemplos para orientar: sofisticada, acolhedora, técnica, moderna...) *</label>
+        <label>Como você quer ser percebida nas imagens? (Exemplos para orientar: sofisticada, acolhedora, técnica, moderna, detalhista. Pode combinar mais de uma.) *</label>
         <textarea name="entry.996706771" required></textarea>
     </div>
 
     <div class="field">
-        <label>o que você definitivamente não gosta em fotos de dentistas? algum estilo, ângulo ou situação que você quer evitar? *</label>
+        <label>O que você definitivamente não gosta em fotos de dentistas? Algum estilo, ângulo ou situação que você quer evitar? *</label>
         <textarea name="entry.1892389654" required></textarea>
     </div>
 
     <div class="field">
-        <label>tem alguma referência visual que você admira, seja de outros profissionais, marcas ou qualquer outra área? *</label>
+        <label>Tem alguma referência visual que você admira, seja de outros profissionais, marcas ou qualquer outra área? *</label>
         <textarea name="entry.1924045166" required></textarea>
     </div>
 
     <div class="field">
-        <label>tem algum protocolo de epi ou item do consultório que precisa aparecer obrigatoriamente nas imagens? *</label>
+        <label>Tem algum protocolo de EPI ou item do consultório que precisa aparecer obrigatoriamente nas imagens? *</label>
         <textarea name="entry.1515815936" required></textarea>
     </div>
 
     <div class="field">
-        <label>o que uma pessoa que nunca te conheceu deve sentir ao ver seu perfil pela primeira vez? *</label>
+        <label>O que uma pessoa que nunca te conheceu deve sentir ao ver seu perfil pela primeira vez? *</label>
         <textarea name="entry.621187782" required></textarea>
     </div>
 
-    <button type="submit" class="submit-btn">enviar briefing :)</button>
+    <button type="submit" class="submit-btn">Enviar</button>
 </form>
 
 <iframe name="hidden_iframe" id="hidden_iframe" class="hidden-iframe"></iframe>
@@ -128,8 +123,8 @@ document.getElementById("hidden_iframe").addEventListener("load", function() {
   if(formSubmitted){
     document.getElementById("form-container").innerHTML =
       `<div class='success-state'>
-        <h2>obrigado!</h2>
-        <p>o seu briefing de fotografia foi enviado com sucesso para a elã.</p>
+        <h2>Enviado!</h2>
+        <p>As respostas foram registradas com sucesso.</p>
       </div>`;
     window.scrollTo(0,0);
   }
