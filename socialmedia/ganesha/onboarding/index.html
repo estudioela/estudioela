@@ -320,8 +320,8 @@ body{padding:20px 12px}
 
 <div class="divider"></div>
 
-<!-- O iframe invisível para onde o formulário será enviado -->
-<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showSuccess();}"></iframe>
+<!-- Usando um iframe oculto para submissão silenciosa -->
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(typeof submitted !== 'undefined' && submitted) { showSuccess(); }"></iframe>
 
 <form
 id="ganesha-form"
