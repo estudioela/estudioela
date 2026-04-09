@@ -320,10 +320,15 @@ body{padding:20px 12px}
 
 <div class="divider"></div>
 
+<!-- O iframe invisível para onde o formulário será enviado -->
+<iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showSuccess();}"></iframe>
+
 <form
 id="ganesha-form"
 action="https://docs.google.com/forms/d/e/1FAIpQLScxXKhPzs3-eeaqjSSH5_Ew2SiqfheDkzAPHHQroyCOgYSNrQ/formResponse"
 method="post"
+target="hidden_iframe"
+onsubmit="submitted=true;"
 >
 
 <div class="section">
@@ -486,6 +491,8 @@ method="post"
 </div>
 
 <script>
+var submitted = false;
+
 function selectScale(btn, groupId, fieldName) {
   document.querySelectorAll('#' + groupId + ' .scale-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
@@ -501,35 +508,18 @@ function toggleReels(input) {
   }
 }
 
-document.getElementById('ganesha-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-
+function showSuccess() {
   var nomeBruto = document.getElementById('nome_profissional').value.trim();
-  var primeiroNome = nomeBruto.split(' ')[0];
+  var primeiroNome = nomeBruto.split(' ')[0] || 'profissional';
   var nomeFormatado = primeiroNome.charAt(0).toUpperCase() + primeiroNome.slice(1).toLowerCase();
 
-  var formData = new FormData(this);
-
-  fetch('https://docs.google.com/forms/d/e/1FAIpQLScxXKhPzs3-eeaqjSSH5_Ew2SiqfheDkzAPHHQroyCOgYSNrQ/formResponse', {
-    method: 'POST',
-    mode: 'no-cors',
-    body: formData
-  }).then(function() {
-    document.getElementById('form-container').innerHTML =
-      '<div class="success-state">' +
-        '<h2>obrigado, ' + nomeFormatado + '!</h2>' +
-        '<p>seus dados já estão com o estúdio elã.</p>' +
-      '</div>';
-    window.scrollTo(0, 0);
-  }).catch(function() {
-    document.getElementById('form-container').innerHTML =
-      '<div class="success-state">' +
-        '<h2>obrigado, ' + nomeFormatado + '!</h2>' +
-        '<p>seus dados já estão com o estúdio elã.</p>' +
-      '</div>';
-    window.scrollTo(0, 0);
-  });
-});
+  document.getElementById('form-container').innerHTML =
+    '<div class="success-state">' +
+      '<h2>obrigado, ' + nomeFormatado + '!</h2>' +
+      '<p>seus dados já estão com o estúdio elã.</p>' +
+    '</div>';
+  window.scrollTo(0, 0);
+}
 </script>
 
 </body>
