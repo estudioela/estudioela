@@ -324,7 +324,6 @@ body{padding:20px 12px}
 id="ganesha-form"
 action="https://docs.google.com/forms/d/e/1FAIpQLScxXKhPzs3-eeaqjSSH5_Ew2SiqfheDkzAPHHQroyCOgYSNrQ/formResponse"
 method="post"
-target="hidden_iframe"
 >
 
 <div class="section">
@@ -482,8 +481,6 @@ target="hidden_iframe"
 
 </form>
 
-<iframe name="hidden_iframe" id="hidden_iframe" class="hidden-iframe"></iframe>
-
 </div>
 </div>
 </div>
@@ -504,26 +501,34 @@ function toggleReels(input) {
   }
 }
 
-var formSubmitted = false;
+document.getElementById('ganesha-form').addEventListener('submit', function(e) {
+  e.preventDefault();
 
-document.getElementById('ganesha-form').addEventListener('submit', function() {
-  formSubmitted = true;
-});
+  var nomeBruto = document.getElementById('nome_profissional').value.trim();
+  var primeiroNome = nomeBruto.split(' ')[0];
+  var nomeFormatado = primeiroNome.charAt(0).toUpperCase() + primeiroNome.slice(1).toLowerCase();
 
-document.getElementById('hidden_iframe').addEventListener('load', function() {
-  if (formSubmitted) {
-    var nomeBruto = document.getElementById('nome_profissional').value.trim();
-    var primeiroNome = nomeBruto.split(' ')[0];
-    var nomeFormatado = primeiroNome.charAt(0).toUpperCase() + primeiroNome.slice(1).toLowerCase();
+  var formData = new FormData(this);
 
+  fetch('https://docs.google.com/forms/d/e/1FAIpQLScxXKhPzs3-eeaqjSSH5_Ew2SiqfheDkzAPHHQroyCOgYSNrQ/formResponse', {
+    method: 'POST',
+    mode: 'no-cors',
+    body: formData
+  }).then(function() {
     document.getElementById('form-container').innerHTML =
       '<div class="success-state">' +
         '<h2>obrigado, ' + nomeFormatado + '!</h2>' +
         '<p>seus dados já estão com o estúdio elã.</p>' +
       '</div>';
-
     window.scrollTo(0, 0);
-  }
+  }).catch(function() {
+    document.getElementById('form-container').innerHTML =
+      '<div class="success-state">' +
+        '<h2>obrigado, ' + nomeFormatado + '!</h2>' +
+        '<p>seus dados já estão com o estúdio elã.</p>' +
+      '</div>';
+    window.scrollTo(0, 0);
+  });
 });
 </script>
 
